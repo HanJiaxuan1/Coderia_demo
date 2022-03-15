@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 用之前先注册
     # 不要忘记写 “,”
+    'user.apps.UserConfig',
     'community.apps.CommunityConfig',
     'django.contrib.admin',
     'django.contrib.auth',
