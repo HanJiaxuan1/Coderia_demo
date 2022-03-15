@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 用之前先注册
+    # 不要忘记写 “,”
     'community.apps.CommunityConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +57,7 @@ ROOT_URLCONF = 'coderia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 会优先在"templates"文件夹下寻找
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,7 +80,10 @@ WSGI_APPLICATION = 'coderia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 更改之前为 'NAME': BASE_DIR / 'db.sqlite3',
+        # 会报错 TypeError: argument of type 'WindowsPath' is not iterable
+        # 更改之后没有出现问题
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
     }
 }
 
@@ -106,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -116,10 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# 相对路径一直有问题，django似乎不给相对路径访问权限，建议全部使用绝对路径
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
