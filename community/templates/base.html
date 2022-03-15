@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+    <meta name="robots" content=""/>
+    <meta name="description" content="Kelsey : Blog HTML Template"/>
+    <meta property="og:title" content="Kelsey : Blog HTML Template"/>
+    <meta property="og:description" content="Kelsey : Blog HTML Template"/>
+    <meta property="og:image" content="https://kelsey.dexignzone.com/xhtml/social-image.png"/>
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.png"/>
+
+    <!-- PAGE TITLE HERE -->
+    <title>{% block title %} Coderia {% endblock %}</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/templete.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="/static/css/skin/skin-1.css">
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/settings.css">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/layers.css">
+    <!-- REVOLUTION NAVIGATION STYLES -->
+    <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/navigation.css">
+{#    {{ moment.include_moment() }}#}
+    {% block style %}
+    {% endblock %}
+
+</head>
+<body id="bg">
+<div class="page-wraper">
+    <div id="loading-area"></div>
+    <!-- header -->
+    <header class="site-header mo-left header-full header header-transparent">
+        <!-- main header -->
+        <div class="sticky-header main-bar-wraper navbar-expand-lg">
+            <div class="main-bar clearfix ">
+                <div class="container-fluid">
+                    <div class="header-content-bx">
+                        <!-- website logo -->
+                        <div class="logo-header">
+                            <a href="#"><img src="/static/images/logo.png" alt=""/></a>
+                        </div>
+                        <!-- nav toggle button -->
+                        <button class="navbar-toggler collapsed navicon justify-content-end kk" type="button"
+                                data-toggle="collapse" data-target="#navbarNavDropdown"
+                                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!-- extra nav -->
+                        <div class="extra-nav">
+                            <div class="extra-cell">
+                                <ul>
+                                    <li class="search-btn"><a id="quik-search-btn" href="#"
+                                                              class="btn radius-xl gray">Search</a></li>
+                                    <li class="search-btn"><a id="log-btn" href="#" class="btn radius-xl gray">Log in</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Quik search -->
+                        <div class="dlab-quik-search">
+                            <form action="#">
+                                <input name="search" value="" type="text" class="form-control"
+                                       placeholder="enter your keyword ...">
+                                <span id="quik-search-remove"><i class="ti-close"></i></span>
+                            </form>
+                        </div>
+                        <!-- main nav -->
+                        <div class="header-nav navbar-collapse collapse justify-content-center nav-dark"
+                             id="navbarNavDropdown">
+                            <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="#">Note Blog <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Note</a></li>
+                                        <li><a href="#">Video Note</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">My Note <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Write Note</a></li>
+                                        <li><a href="#"> Upload Video Note</a></li>
+                                        <li><a href="#">All Note</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main header END -->
+    </header>
+    <!-- header END -->
+
+    {% block body %}
+
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="footer-title text-center"><span>Our Story</span></h4>
+                    </div>
+                    <div class="col-12">
+                        <div class="trending-stories owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-2">
+                            <div class="item">
+                                <div class="blog-card blog-grid no-gap">
+                                    <div class="blog-card-media">
+                                        <img src="/static/images/blog/grid/team1.jpg" alt=""/>
+                                    </div>
+                                    <div class="blog-card-info">
+                                        <h4 class="title"><a href="#">Brainstorming and Discuss</a>
+                                        </h4>
+                                        <div class="date">
+                                            03 <span></span> 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="blog-card blog-grid no-gap">
+                                    <div class="blog-card-media">
+                                        <img src="/static/images/blog/grid/team2.jpg" alt=""/>
+                                    </div>
+                                    <div class="blog-card-info">
+                                        <h4 class="title"><a href="#">Working Together</a>
+                                        </h4>
+                                        <div class="date">
+                                            4 <span></span> 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="blog-card blog-grid no-gap">
+                                    <div class="blog-card-media">
+                                        <img src="/static/images/blog/grid/team1.jpg" alt=""/>
+                                    </div>
+                                    <div class="blog-card-info">
+                                        <h4 class="title"><a href="#">Help each other</a></h4>
+                                        <div class="date">
+                                            5 <span></span> 2022
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="footer-bottom">
+                                <div class="footer-copy">
+                                    <span>©2022. Coderia.</span>
+                                </div>
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="/static/images/logo_black.png" alt=""/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer END-->
+    <button class="scroltop fa fa-chevron-up"></button>
+</div>
+
+
+</body>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="/static/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
+<script src="/static/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/static/plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
+<script src="/static/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+<script src="/static/plugins/magnific-popup/magnific-popup.js"></script><!-- MAGNIFIC POPUP JS -->
+<script src="/static/plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
+<script src="/static/plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
+<script src="/static/plugins/imagesloaded/imagesloaded.js"></script><!-- IMAGESLOADED -->
+<script src="/static/plugins/masonry/masonry-3.1.4.js"></script><!-- MASONRY -->
+<script src="/static/plugins/masonry/masonry.filter.js"></script><!-- MASONRY -->
+<script src="/static/plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
+<script src="/static/js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+<script src="/static/js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS -->
+<script src="/static/js/dz.ajax.js"></script><!-- CONTACT JS  -->
+<!-- revolution -->
+<script src="/static/plugins/revolution/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="/static/plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script src="/static/js/rev.slider.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        'use strict';
+        dz_rev_slider_1();
+    });	/*ready*/
+</script>
+
+{% block script %} {% endblock %}
