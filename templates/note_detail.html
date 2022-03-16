@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+
+{% block title %} Coderia - Note Page {% endblock %}
+
+<!-- Dispaly All Note -->
+{% block body %}
+    <div class="page-content bg-white">
+        <div class="content-block">
+            <!-- About Us -->
+            <div class="section-full content-inner bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+                            <div class="blog-post blog-single blog-post-style-2 sidebar">
+                                <div class="dlab-post-info">
+                                    <div class="dlab-post-meta">
+                                        <div class="date">
+{#                                            {{ moment(note.timestamp).fromNow() }}#}
+                                        </div>
+                                    </div>
+                                    <div class="dlab-post-title">
+                                        <h2 class="post-title">{{ note.title }}</h2>
+                                        <h4>Written by {{ note.author.username }}</h4>
+                                    </div>
+                                    <div class="dlab-divider divider-2px bg-gray-dark"><i class="icon-dot c-square"></i>
+                                    </div>
+                                    <div class="dlab-post-text text">
+                                        <div class="wp-block-image alignwide">
+                                            <figure class="aligncenter">
+                                                <img src="/static/images/blog/large/pic1.jpg" alt="">
+                                            </figure>
+                                        </div>
+                                        <p>
+                                            {% if note.content_html %}
+                                                {{ note.content_html |safe|striptags }}
+                                            {% else %}
+                                                {{ note.content }}
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="dlab-post-tags d-flex">
+                                        <div class="post-tags">
+                                            <a href="javascript:void(0);">Java</a>
+                                            <a href="javascript:void(0);">Windows</a>
+                                            <a href="javascript:void(0);">Developer</a>
+                                        </div>
+                                        <div class="share-post ml-auto">
+                                            <ul class="slide-social">
+                                                <li>Share:</li>
+                                                <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                                </li>
+                                                <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="javascript:void(0);"><i class="fa fa-pinterest"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="min-container">
+                                <div class="post-btn">
+                                    <div class="prev-post">
+                                        <img src="/static/images/blog/recent-blog/pic2.jpg" alt=""/>
+                                        <h6 class="title"><a href="#">The difference between shallow copy and deep
+                                            copy</a></h6>
+                                    </div>
+                                    <div class="next-post">
+                                        <h6 class="title"><a href="#">How to write a chatbot in Java</a></h6>
+                                        <img src="/static/images/blog/recent-blog/pic1.jpg" alt=""/>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <h6 class="widget-title">You Might Also Like</h6>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                            <div class="category-box overlay m-b30">
+                                                <div class="category-media">
+                                                    <img src="/static/images/category/pic1.jpg" alt="">
+                                                </div>
+                                                <div class="category-info">
+                                                    <h6 class="title m-b0"><a href="#">IDEA Remote debugging Java
+                                                        code</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                            <div class="category-box overlay m-b30">
+                                                <div class="category-media">
+                                                    <img src="/static/images/category/pic2.jpg" alt="">
+                                                </div>
+                                                <div class="category-info">
+                                                    <h6 class="title m-b0"><a href="post-navigation.html">Front-end
+                                                        interviews</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                                            <div class="category-box overlay m-b30">
+                                                <div class="category-media">
+                                                    <img src="/static/images/category/pic3.jpg" alt="">
+                                                </div>
+                                                <div class="category-info">
+                                                    <h6 class="title m-b0"><a href="#">IDEA Remote debugging Java
+                                                        code</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear m-b30" id="comment-list">
+                                    <div class="comments-area" id="comments">
+                                        <h6 class="comments-title">8 Comments</h6>
+                                        <div>
+                                            <!-- comment list END -->
+                                            <ol class="comment-list">
+                                                <li class="comment">
+                                                    <div class="comment-body">
+                                                        <div class="comment-author vcard"><img class="avatar photo"
+                                                                                               src="/static/images/testimonials/pic1.jpg"
+                                                                                               alt=""> <cite class="fn">Kelsey
+                                                            Holmes</cite> <span class="says">says:</span></div>
+                                                        <div class="comment-meta"><a href="javascript:void(0);">October
+                                                            6, 2020 at 7:15 am</a></div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                                                            vitae neqnsectetur adipiscing elit. Nam viae neqnsectetur
+                                                            adipiscing elit.
+                                                            Nam vitae neque vitae sapien malesuada aliquet. </p>
+                                                        <div class="reply"><a href="javascript:void(0);"
+                                                                              class="comment-reply-link">Reply</a></div>
+                                                    </div>
+                                                    <ol class="children">
+                                                        <li class="comment odd parent">
+                                                            <div class="comment-body">
+                                                                <div class="comment-author vcard"><img
+                                                                        class="avatar photo"
+                                                                        src="/static/images/testimonials/pic2.jpg"
+                                                                        alt=""> <cite class="fn">Stacy poe</cite> <span
+                                                                        class="says">says:</span></div>
+                                                                <div class="comment-meta"><a href="javascript:void(0);">October
+                                                                    6, 2020 at 7:15 am</a></div>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                                    elit. Nam vitae neque vitae sapien malesuada
+                                                                    aliquet.
+                                                                    In viverra dictum justo in vehicula. Fusce et massa
+                                                                    eu ante ornare molestie. Sed vestibulum sem felis,
+                                                                    ac elementum ligula blandit ac.</p>
+                                                                <div class="reply"><a href="javascript:void(0);"
+                                                                                      class="comment-reply-link">Reply</a>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="children">
+                                                                <li class="comment odd parent">
+                                                                    <div class="comment-body">
+                                                                        <div class="comment-author vcard"><img
+                                                                                class="avatar photo"
+                                                                                src="/static/images/testimonials/pic3.jpg"
+                                                                                alt=""> <cite class="fn">Stacy
+                                                                            poe</cite> <span class="says">says:</span>
+                                                                        </div>
+                                                                        <div class="comment-meta"><a
+                                                                                href="javascript:void(0);">October 6,
+                                                                            2020 at 7:15 am</a></div>
+                                                                        <p>Lorem ipsum dolor sit amet, consectetur
+                                                                            adipiscing elit. Nam vitae neque vitae
+                                                                            sapien malesuada aliquet.
+                                                                            In viverra dictum justo in vehicula. Fusce
+                                                                            et massa eu ante ornare molestie. Sed
+                                                                            vestibulum sem felis,
+                                                                            ac elementum ligula blandit ac.</p>
+                                                                        <div class="reply"><a href="javascript:void(0);"
+                                                                                              class="comment-reply-link">Reply</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ol>
+                                                            <!-- list END -->
+                                                        </li>
+                                                    </ol>
+                                                    <!-- list END -->
+                                                </li>
+                                                <li class="comment">
+                                                    <div class="comment-body">
+                                                        <div class="comment-author vcard"><img class="avatar photo"
+                                                                                               src="/static/images/testimonials/pic1.jpg"
+                                                                                               alt=""> <cite class="fn">Stacy
+                                                            poe</cite> <span class="says">says:</span></div>
+                                                        <div class="comment-meta"><a href="javascript:void(0);">October
+                                                            6, 2020 at 7:15 am</a></div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                                                            vitae neque vitae sapien malesuada aliquet.
+                                                            In viverra dictum justo in vehicula. Fusce et massa eu ante
+                                                            ornare molestie. Sed vestibulum sem felis,
+                                                            ac elementum ligula blandit ac.</p>
+                                                        <div class="reply"><a href="javascript:void(0);"
+                                                                              class="comment-reply-link">Reply</a></div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                            <!-- comment list END -->
+                                            <!-- Form -->
+                                            <div class="comment-respond" id="respond">
+                                                <h3 class="comment-reply-title" id="reply-title">Leave a Reply <small>
+                                                    <a style="display:none;" href="#" id="cancel-comment-reply-link"
+                                                       rel="nofollow">Cancel reply</a> </small></h3>
+                                                <form class="comment-form" id="commentform" method="post" action="">
+                                                    <p class="comment-form-author">
+                                                        <label for="author">Name <span class="required">*</span></label>
+                                                        <input type="text" value="" placeholder="Author" id="author">
+                                                    </p>
+                                                    <p class="comment-form-email">
+                                                        <label for="email">Email <span class="required">*</span></label>
+                                                        <input type="text" value="" placeholder="Email" id="email">
+                                                    </p>
+                                                    <p class="comment-form-url">
+                                                        <label for="url">Website</label>
+                                                        <input type="text" value="" placeholder="Website" id="url">
+                                                    </p>
+                                                    <p class="comment-form-comment">
+                                                        <label for="comment">Comment</label>
+                                                        <textarea rows="8" placeholder="Add a Comment"
+                                                                  id="comment"></textarea>
+                                                    </p>
+                                                    <p class="form-submit">
+                                                        <input type="submit" value="Post Comment" class="submit"
+                                                               id="submit">
+                                                    </p>
+                                                </form>
+                                            </div>
+                                            <!-- Form END -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+                            <div class="side-bar p-l30 sticky-top">
+                                <div class="widget widget-author">
+                                    <h6 class="widget-title">Alice</h6>
+                                    <div class="author-blog">
+                                        <div class="author-profile-info">
+                                            <div class="author-profile-pic">
+                                                <img src="/static/images/testimonials/pic1.jpg" alt=""> //用户头像
+                                            </div>
+                                            <div class="author-profile-content">
+                                                <p>123456@hotmail.com </p>
+                                                <ul class="list-inline m-b0">
+                                                    <li>
+                                                        <div class="inner2-left col-sm-3">
+                                                            <div class="new-posts">
+                                                                <div>
+                                                                    <a href="#">
+                                                                        <svg class="icon" viewBox="0 0 1024 1024"
+                                                                             version="1.1" width="40" height="40">
+                                                                            <defs>
+                                                                                <style type="text/css"></style>
+                                                                            </defs>
+                                                                            <path d="M824 921H184c-52.9 0-96-43.1-96-96V185c0-52.9 43.1-96 96-96h640c52.9 0 96 43.1 96 96v640c0 52.9-43.1 96-96 96zM184 153c-17.6 0-32 14.4-32 32v640c0 17.6 14.4 32 32 32h640c17.6 0 32-14.4 32-32V185c0-17.6-14.4-32-32-32H184z"
+                                                                                  fill="#ab801d" p-id="1446"></path>
+                                                                            <path d="M285.9 750.9c-8.4 0-16.5-3.3-22.6-9.4-8.4-8.4-11.5-20.8-7.9-32.2l49.3-157.1c1.5-4.9 4.3-9.4 7.9-13l328.8-328.8c6-6 14.1-9.4 22.6-9.4s16.6 3.4 22.6 9.4l107.8 107.8c12.5 12.5 12.5 32.8 0 45.3L465.6 692.2c-3.6 3.6-8.1 6.4-13 7.9l-157.1 49.3c-3.2 1-6.4 1.5-9.6 1.5z m77.5-172L334.8 670l91.2-28.6 300.6-300.6-62.6-62.5-300.6 300.6z"
+                                                                                  fill="#ab801d" p-id="1447"></path>
+                                                                            <path d="M486.4 640.3c-8.2 0-16.4-3.1-22.6-9.4L374 541.1c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l89.8 89.8c12.5 12.5 12.5 32.8 0 45.3-6.4 6.3-14.5 9.4-22.7 9.4z"
+                                                                                  fill="#ab801d" p-id="1448"></path>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="icon-word">new note</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget recent-posts-entry">
+                                    <h5 class="widget-title">Hottest Posts</h5>
+                                    <div class="widget-post-bx">
+                                        <div class="widget-post clearfix">
+                                            <div class="dlab-post-media">
+                                                <img src="/static/images/blog/recent-blog/pic2.jpg" alt="" width="200"
+                                                     height="143">
+                                            </div>
+                                            <div class="dlab-post-info">
+                                                <div class="dlab-post-header">
+                                                    <h6 class="post-title"><a href="#">python work</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-post clearfix">
+                                            <div class="dlab-post-media">
+                                                <img src="/static/images/blog/recent-blog/pic3.jpg" alt="" width="200"
+                                                     height="143">
+                                            </div>
+                                            <div class="dlab-post-info">
+                                                <div class="dlab-post-header">
+                                                    <h6 class="post-title"><a href="#">Java work</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-post clearfix">
+                                            <div class="dlab-post-media">
+                                                <img src="/static/images/blog/recent-blog/pic4.jpg" alt="" width="200"
+                                                     height="143">
+                                            </div>
+                                            <div class="dlab-post-info">
+                                                <div class="dlab-post-header">
+                                                    <h6 class="post-title"><a href="#">HTML & CSS</a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About Us End -->
+    </div>
+    <!-- contact area END -->
+    </div>
+    <!-- Content END-->
+{% endblock %}

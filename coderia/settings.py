@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # 用之前先注册
     # 不要忘记写 “,”
     'community.apps.CommunityConfig',
+    'note.apps.NoteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
