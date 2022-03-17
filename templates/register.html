@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %} Coderia - Register {% endblock %}
+
+<!-- Sign in / sign up modal-->
+{% block body %}
+    <div class="page-content bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+
+                            <h2 class="h4 mb-3" style="font-family: STHupo,serif">No account? Sign up</h2>
+                            <p class="fs-sm text-muted mb-4">Registration takes less than a minute but gives you full
+                                control over your orders.</p>
+                            <form class="needs-validation" novalidate onsubmit="return checkRegister()">
+                                <div class="row gx-4 gy-3">
+                                    <div class="col-sm-12">
+                                        <label class="form-label" for="reg-username">User Name</label>
+                                        <input class="form-control" type="email" required id="reg-username">
+                                        <div class="invalid-feedback">Please enter valid email address!</div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label class="form-label" for="reg-password">Password</label>
+                                        <input class="form-control" type="password" required id="reg-password">
+                                        <div class="invalid-feedback">Please enter password!</div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label class="form-label" for="reg-password-confirm">Confirm Password</label>
+                                        <input class="form-control" type="password" required id="reg-password-confirm">
+                                        <div class="invalid-feedback">Passwords do not match!</div>
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <br>
+                                        <button class="btn btn-primary" type="submit"
+                                                style="display:block;margin:0 auto">
+                                            <i class="ci-user me-2 ms-n1"></i>Sign Up
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function checkLogin() {
+            let username = $('#username').val();
+            let password = $('#password').val();
+            AjaxForLoginHere(username, password);
+            return false;
+        }
+
+        function checkRegister() {
+            let username = $('#reg-username').val()
+            let pas = $('#reg-password').val()
+            let repas = $('#reg-password-confirm').val()
+            if (pas !== repas) {
+                alert('Two passwords are not same');
+                return false;
+            }
+            AjaxForRegisterHere(username, pas);
+            return false;
+        }
+
+        function AjaxForLoginHere(username, password) {
+            $.ajax({
+                type: 'post',
+                url: '/LoginCheck/',
+                data: {'username': username, 'password': password},
+                success: function (response) {
+                    switch (response) {
+                        case '0':
+                            alert('The password or the username is wrong');
+                            break;
+                        case '1':
+                            alert('Login successfully');
+                            window.location.replace("");
+                            break;
+                    }
+                },
+                error: function () {
+                    alert('Connection error');
+                }
+            })
+        }
+
+        function AjaxForRegisterHere(username, password) {
+            $.ajax({
+                type: 'post',
+                url: '/RegisterCheck/',
+                data: {'username': username, 'password': password},
+                success: function (response) {
+                    switch (response) {
+                        case '0':
+                            alert('The username has been used');
+                            break;
+                        case '1':
+                            alert('Register successfully');
+                            window.location.replace("{% url 'login' %}");
+                            break;
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            })
+        }
+    </script>
+    <style>
+        .page-content {
+            background-image: url("../static/images/bg.jpg");
+        }
+
+        .col-md-6 {
+            position: relative;
+            left: 26%;
+            margin-top: 15%
+
+        }
+    </style>
+{% endblock %}

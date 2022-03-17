@@ -72,7 +72,7 @@
                                     <li class="search-btn"><a id="quik-search-btn" href="javascript:;"
                                                               class="btn radius-xl gray">Search</a></li>
                                     <li class="search-btn"><a id="log-btn"
-                                                              href="#"
+                                                              href="{% url 'login' %}"
                                                               class="btn radius-xl gray">Log in</a></li>
                                 </ul>
                             </div>
@@ -99,13 +99,13 @@
                                 <li>
                                     <a href="#">My Note <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Write Note</a></li>
+                                        <li><a href="{% url 'note:code_note' %}">Write Note</a></li>
                                         <li><a href="#"> Upload Video Note</a></li>
                                         <li><a href="#">All Note</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="{% url 'about_us' %}">About Us</a>
                                 </li>
                             </ul>
                         </div>

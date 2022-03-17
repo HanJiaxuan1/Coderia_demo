@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %} Coderia - Login {% endblock %}
+
+<!-- Sign in / sign up modal-->
+{% block body %}
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <h2 class="h4 mb-1" style="font-family: STHupo,serif">Sign In</h2>
+                        <hr>
+                        <form class="needs-validation"  novalidate onsubmit="return checkLogin()">
+                            <div class="input-group mb-3"><i
+                                    class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                                <input id="username" class="form-control rounded-start" type="email" placeholder="Email" required>
+                            </div>
+                            <div class="input-group mb-3"><i
+                                    class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
+                                <div class="password-toggle w-100">
+                                    <input class="form-control" type="password" placeholder="Password" id="password" required>
+                                    <label class="password-toggle-btn" aria-label="Show/hide password">
+                                        <input class="password-toggle-check" type="checkbox"><span
+                                            class="password-toggle-indicator"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <a class="nav-link-inline fs-sm" href="{% url 'register' %}">Don’t have an account? Register</a>
+                                <a class="nav-link-inline fs-sm" href="#">Forgot Password?</a>
+                            </div>
+                            <hr class="mt-4">
+                            <div class="text-end pt-4">
+                                <button id='test' class="btn btn-primary" type="submit" style="display:block;margin:0 auto" ><i class="ci-sign-in me-2 ms-n21"></i>Sign In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    function checkLogin(){
+        let username = $('#username').val();
+        let password = $('#password').val();
+        AjaxForLoginHere(username,password);
+        return false;
+    }
+
+    function checkRegister(){
+        let username = $('#reg-username').val()
+        let pas = $('#reg-password').val()
+        let repas = $('#reg-password-confirm').val()
+        if (pas !== repas){
+            alert('two passwords are not same');
+            return false
+        }
+        AjaxForRegisterHere(username,pas);
+        return false;
+    }
+
+    function AjaxForLoginHere(username,password){
+        $.ajax({
+            type:'post',
+            url:'/LoginCheck/',
+            data:{'username':username,'password':password},
+            success:function (response){
+                switch (response){
+                    case '0':
+                        alert('The password or the username is wrong');
+                        break;
+                    case '1':
+                        alert('Login successfully');
+                        window.location.replace("{% url 'index' %}");
+                        break;
+                }
+            },
+            error:function (){
+                alert('Connection error');
+            }
+        })
+     }
+
+    function AjaxForRegisterHere(username,password){
+        $.ajax({
+            type:'post',
+            url:'/RegisterCheck/',
+            data:{'username': username,'password':password},
+            success:function (response){
+                switch (response){
+                    case '0':
+                        alert('The username has been used');
+                        break;
+                    case '1':
+                        alert('Register successfully');
+                        break;
+                }
+            },
+            error:function (){
+                alert('connection error');
+            }
+         })
+     }
+
+</script>
+
+<style>
+    .page-content{
+        background-image: url("../static/images/bg.jpg");
+    }
+    .col-md-6{
+        position: relative;
+        left: 26%;
+        margin-top: 15%
+
+    }
+</style>
+{% endblock %}
