@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/layers.css">
     <!-- REVOLUTION NAVIGATION STYLES -->
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/navigation.css">
-{#    {{ moment.include_moment() }}#}
+    {#    {{ moment.include_moment() }}#}
     {% block style %}
     {% endblock %}
 
@@ -47,9 +47,9 @@
 <div class="page-wraper">
     <div id="loading-area"></div>
     <!-- header -->
-    <header class="site-header mo-left header-full header header-transparent" style="background-color: black;margin-top: -5%;" >
+    <header class="site-header mo-left header-full header header-transparent" style="background-color: black">
         <!-- main header -->
-        <div class="sticky-header main-bar-wraper navbar-expand-lg" >
+        <div class="sticky-header main-bar-wraper navbar-expand-lg">
             <div class="main-bar clearfix ">
                 <div class="container-fluid">
                     <div class="header-content-bx">
@@ -106,6 +106,9 @@
                                 </li>
                                 <li>
                                     <a href="{% url 'about_us' %}">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'profile' %}">Profile</a>
                                 </li>
                             </ul>
                         </div>
