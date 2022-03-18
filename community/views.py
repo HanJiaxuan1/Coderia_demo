@@ -162,3 +162,7 @@ def NoteDetail(request):
                        'username': find_note.uid.username}
         note_data = json.dumps(note_detail)
         return HttpResponse(note_data)
+
+
+def profile(request):
+    return render(request, 'profile.html')

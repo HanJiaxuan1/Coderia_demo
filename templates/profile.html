@@ -1,0 +1,448 @@
+{% extends "base_fix.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <style>
+
+
+        .content-area {
+            background: #fff;
+
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .row {
+            border-bottom: 1px solid #d8d8d8;
+            padding: 5px 0;
+            width: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .row:first-of-type {
+            margin-top: 0;
+        }
+
+        .row:last-of-type {
+            border-bottom: 1px solid #fff;
+        }
+
+        .row .field {
+            display: inline-block;
+            position: relative;
+
+            margin-left: 20px;
+            padding-right: 20px;
+            -webkit-transition: all 80ms ease-in-out;
+            -moz-transition: all 80ms ease-in-out;
+            -o-transition: all 80ms ease-in-out;
+            transition: all 80ms ease-in-out;
+        }
+
+        .row .field:first-of-type {
+            margin-left: 0;
+        }
+
+        .row .field label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #9aa9aa;
+            -webkit-transition: all 80ms ease-in-out;
+            -moz-transition: all 80ms ease-in-out;
+            -o-transition: all 80ms ease-in-out;
+            transition: all 80ms ease-in-out;
+            margin-top: 10px;
+            margin-bottom: -10px;
+        }
+
+        .row .field input {
+            background: transparent;
+            font-size: 16px;
+            color: #444;
+            border: 1px solid rgba(150, 150, 150, 0);
+            margin: 0 0 0 -2px;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            -webkit-transition: all 80ms ease-in-out;
+            -moz-transition: all 80ms ease-in-out;
+            -o-transition: all 80ms ease-in-out;
+            transition: all 80ms ease-in-out;
+        }
+
+        .row .field input[type=email] {
+            text-decoration: underline;
+            color: #369;
+            cursor: pointer;
+        }
+
+        .button {
+            margin-bottom: 20px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .button a {
+            display: inline-block;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 0 15px;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+        }
+
+        .button a.edit {
+
+            color: #3e4550;
+
+            border: 1px solid #dae0e1;
+            -webkit-transition: all 80ms ease-in-out;
+            -moz-transition: all 80ms ease-in-out;
+            -o-transition: all 80ms ease-in-out;
+            transition: all 80ms ease-in-out;
+        }
+
+        .button a.edit:hover {
+            background: skyblue;
+
+        }
+
+        .button a.edit:active {
+            background-image: linear-gradient(-179deg, #e6ecf1 0%, #f2f6fa 100%);
+            border: 1px solid #d5dadb;
+        }
+
+        .button a.save {
+            display: none;
+            background: slateblue;
+            color: #fff;
+        }
+
+
+        html.active .row {
+            border-bottom: 1px solid #fff;
+        }
+
+        html.active .row .field {
+            margin-left: 13px;
+            padding-right: 13px;
+            border-right: 1px solid #fff;
+        }
+
+        html.active .row .field:first-of-type {
+            margin-left: 0;
+        }
+
+        html.active .row .field:last-of-type {
+            border: none;
+            padding-right: 0;
+        }
+
+        html.active .row .field label {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        html.active .row .field input {
+            margin-left: -16px;
+            padding: 0 15px;
+            background: #fff;
+            border: 1px solid #d8d8d8;
+            -moz-box-shadow: inset 1px 1px 4px 0px rgba(220, 220, 220, 0.5);
+            box-shadow: inset 1px 1px 4px 0px rgba(220, 220, 220, 0.5);
+            height: 40px;
+            line-height: 40px;
+        }
+
+        html.active .row .field input:focus {
+            outline: none;
+            border: 1px solid #b28dd7;
+        }
+
+        html.active .row .field input[type=email] {
+            cursor: text;
+            color: #444;
+            text-decoration: none;
+        }
+
+        html.active .button a.edit {
+            display: none;
+        }
+
+        html.active .button a.save {
+            display: inline-block;
+        }
+    </style>
+    <style type="text/css">
+
+        .account-settings .user-profile {
+            margin: 0 0 1rem 0;
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+
+        .account-settings .user-profile .user-avatar {
+            margin: 0 0 1rem 0;
+        }
+
+        .account-settings .user-profile .user-avatar img {
+            width: 90px;
+            height: 90px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+            border-radius: 100px;
+        }
+
+        .account-settings .user-profile h5.user-name {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .account-settings .user-profile h6.user-email {
+            margin: 0;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #9fa8b9;
+        }
+
+        .account-settings .about {
+            margin: 2rem 0 0 0;
+            text-align: center;
+        }
+
+        .account-settings .about h5 {
+            margin: 0 0 15px 0;
+            color: #007ae1;
+        }
+
+        .account-settings .about p {
+            font-size: 0.825rem;
+        }
+
+        {#form{ position:absolute;z-index:100 }#}
+
+        {#* { touch-action: pan-y; }#}
+
+
+    </style>
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12" style="margin-top: 15%">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                    <img src="../static/images/category/pic1.jpg" alt="My photo">
+                                </div>
+                                <h5 class="user-name">user.username</h5>
+                                <h6 class="user-email">user.email</h6>
+                            </div>
+                            <div class="about">
+                                <button class="btn btn-sm btn-light border-0"> Edit Photo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12" style="margin-top: 15%">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Username</label>
+                                    <label>
+                                        <input placeholder="username" id="username" type="text" value="username"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Firstname</label>
+                                    <label>
+                                        <input id="firstname" type="text" value="first_name"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Lastname</label>
+                                    <label>
+                                        <input id="lastname" type="text" value="last_name"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Birthday</label>
+                                    <label>
+                                        <input id="birthday" type="date" value="date_of_birth"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Phone</label>
+                                    <label>
+                                        <input id="phone" type="text" value="phone"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Email</label>
+                                    <label>
+                                        <input id="email" type="email" value="email"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="field">
+                                    <label>Region</label>
+                                    <label>
+                                        <input id="region" type="text" value="region"/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="text-right">
+                                        <div class="button" align="center">
+                                            <a class="btn-primary edit">Edit Fields</a>
+                                            <a class="btn-secondary save" data-toggle="modal"
+                                               data-target="#modal-warning">Save Changes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modal-warning" class="modal modal-message modal-warning fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-warning"></i>
+                </div>
+                <div class="modal-title"></div>
+
+                <div class="modal-body" id="msgcontent"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
+                </div>
+            </div> <!-- / .modal-content -->
+        </div> <!-- / .modal-dialog -->
+    </div>
+    <style type="text/css">
+        .modal-content {
+            -webkit-border-radius: 0;
+            -webkit-background-clip: padding-box;
+            -moz-border-radius: 0;
+            -moz-background-clip: padding;
+            border-radius: 6px;
+            background-clip: padding-box;
+            -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+            -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+            color: #000;
+            background-color: #fff;
+            border: rgba(0, 0, 0, 0);
+        }
+
+        .modal-message .modal-dialog {
+            width: 300px;
+        }
+
+        .modal-message .modal-body, .modal-message .modal-footer, .modal-message .modal-header, .modal-message .modal-title {
+            background: 0 0;
+            border: none;
+            margin: 0;
+            padding: 0 20px;
+            text-align: center !important;
+        }
+
+        .modal-message .modal-title {
+            font-size: 17px;
+            color: #737373;
+            margin-bottom: 3px;
+        }
+
+        .modal-message .modal-body {
+            color: #737373;
+        }
+
+        .modal-message .modal-header {
+            color: #fff;
+            margin-bottom: 10px;
+            padding: 15px 0 8px;
+        }
+
+        .modal-message .modal-header .fa,
+        .modal-message .modal-header
+        .glyphicon, .modal-message
+        .modal-header .typcn, .modal-message .modal-header .wi {
+            font-size: 30px;
+        }
+
+        .modal-message .modal-footer {
+            margin: 25px 0 20px;
+            padding-bottom: 10px;
+        }
+
+        .modal-backdrop.in {
+            zoom: 1;
+            filter: alpha(opacity=75);
+            -webkit-opacity: .75;
+            -moz-opacity: .75;
+            opacity: .75;
+        }
+
+        .modal-backdrop {
+            background-color: #fff;
+        }
+    </style>
+
+{% endblock %}
+
+
+<script>
+    $(function () {
+            $(":input").prop('disabled', true)
+                .keyup(resizeInput)
+                .each(resizeInput);
+
+            $('.edit').click(function () {
+                $('html').addClass('active');
+                $('input').prop('disabled', false);
+            });
+
+            $('.save').click(function () {
+                $('html').removeClass('active');
+                $('input').prop('disabled', true);
+            });
+
+            function resizeInput() {
+                $(this).attr('size', $(this).val().length + 2);
+            }
+        }
+    );
+
+</script>

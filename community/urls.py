@@ -11,4 +11,5 @@ urlpatterns = [
     path('CompileCode/', views.CompileCode, name='CompileCode'),
     path('PostNote/', views.PostNote, name='PostNote'),
     path('NoteDetail/', views.NoteDetail, name='NoteDetail'),
+    path('profile/', views.profile, name='profile'),
 ]
