@@ -2,8 +2,8 @@
 
 {% block title %} Coderia - Note Page {% endblock %}
 
-<!-- Dispaly All Note -->
 {% block body %}
+    <!-- Dispaly All Note -->
     <div class="page-content bg-white">
         <!-- Slider Banner -->
         <div class="main-slide p-t30">
@@ -62,25 +62,27 @@
                             <div class="row loadmore-content">
                                 <div class="col-lg-12">
                                     {% for note in note_list %}
-                                        <div class="blog-card blog-md">
+                                        <div name="note_detail" class="blog-card blog-md" onclick="window.location.href='{% url 'note:note_detail' note.note_id %}'">
                                             <div class="blog-card-media">
                                                 <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
                                             </div>
                                             <div class="blog-card-info">
-                                                <h4 class="title"><a
-                                                        href="{{ url_for('note_detail', note_id=note.note_id) }}">{{ note.title }}</a></h4>
+                                                <h4 class="title">
+                                                    <a>{{ note.title }}</a>
+                                                </h4>
                                                 <p>
 {#                                                    {{ moment(note.timestamp).fromNow() }} #}
-                                                    <a style="font-weight: bold">written by {{ note.author.username }}</a>
+                                                    <a style="font-weight: bold">written
+                                                        by {{ note.uid.username }}</a>
                                                 </p>
                                                 <p>
-                                                {% if note.content_html %}
-                                                    {{ note.content_html |safe|striptags|truncate(150,killwords=Flase,leeway=0) }}
-                                                {% else %}
-                                                    {{ note.content |truncatechars(100,killwords=Flase,leeway=0) }}
-                                                {% endif %}
+                                                    {% if note.content_html %}
+                                                        {{ note.content_html | safe | striptags | truncatechars:200 }}
+                                                    {% else %}
+                                                        {{ note.content | truncatechars:150 }}
+                                                    {% endif %}
                                                 </p>
-                                                <a href="{{ url_for('note_detail', note_id=note.note_id) }}" class="btn-link readmore">
+                                                <a class="btn-link readmore">
                                                     <i class="la la-arrow-right"></i>
                                                 </a>
                                             </div>
@@ -150,7 +152,7 @@
                                             </div>
                                             <div class="dlab-post-info">
                                                 <div class="dlab-post-header">
-                                                    <h6 class="post-title"><a href="post-gallery-alternative.html">python
+                                                    <h6 class="post-title"><a href="#">python
                                                         work</a></h6>
                                                 </div>
                                             </div>

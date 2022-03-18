@@ -148,3 +148,17 @@ def PostNote(request):
         new_note = Note(title=title, content=content, content_html=content_html, uid=user)
         new_note.save()
         return HttpResponse("2")
+
+
+def NoteDetail(request):
+    if request.method == 'POST':
+        note_id = request.POST.get('note_id')
+        find_note = Note.objects.get(note_id=note_id)
+        if find_note is None:
+            return HttpResponse("0")
+        note_detail = {'note_id': find_note.note_id, 'title': find_note.title,
+                       'content': find_note.content, 'content_html': find_note.content_html,
+                       'timestamp': find_note.timestamp, 'user_id': find_note.uid.uid,
+                       'username': find_note.uid.username}
+        note_data = json.dumps(note_detail)
+        return HttpResponse(note_data)

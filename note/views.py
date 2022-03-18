@@ -29,5 +29,15 @@ def code_note(request):
     return render(request, 'post.html')
 
 
+def show_notes(request):
+    note_list = Note.objects.all()
+    return render(request, 'note_blog.html', {'note_list': note_list})
 
 
+def note_detail(request, note_id):
+    find_note = Note.objects.get(note_id=note_id)
+    return render(request, 'note_detail.html', {'note': find_note})
+
+
+def upload_video(request):
+    return render(request, 'upload.html')

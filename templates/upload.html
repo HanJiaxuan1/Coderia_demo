@@ -744,8 +744,8 @@
 <form action="" method="post" enctype="multipart/form-data" nonvalidate>
     <div data-v-937cba2a="" data-v-37158ef0="">
         <div data-v-21ae2c29="" data-v-937cba2a="" class="content-block" style="top: 55px">
-            {{ form.hidden_tag() }}
-            <div data-v-21ae2c29="" class="top-title" style="width:400px; font-family: 'Segoe UI Black';font-size:25px">Video or audio to text notes</div>
+            {% csrf_token %}
+            <div data-v-21ae2c29="" class="top-title" style="width:400px; font-family: 'Segoe UI Black',serif;font-size:25px">Video or audio to text notes</div>
             <div data-v-21ae2c29="" class="left-box">
                 <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">
                     <div data-v-154ce747="" class="order">1</div>
@@ -818,7 +818,7 @@
                                     d="M7.53341 8.49432C7.84947 8.17791 8.27834 8 8.72569 8H12.2685C12.4809 8 12.6845 8.0844 12.8345 8.23462L14.3716 9.77333H19.3543C19.8016 9.77333 20.2305 9.95124 20.5465 10.2677C20.8626 10.584 21.04 11.0129 21.04 11.46V18.5533C21.04 19.0004 20.8626 19.4293 20.5465 19.7457C20.2305 20.0621 19.8016 20.24 19.3543 20.24H8.72569C8.27833 20.24 7.84947 20.0621 7.53341 19.7457C7.21737 19.4293 7.03998 19.0004 7.03998 18.5533V9.68667C7.03998 9.23961 7.21737 8.81069 7.53341 8.49432ZM8.72569 9.6C8.70324 9.6 8.68153 9.60892 8.66539 9.62508C8.64922 9.64127 8.63998 9.6634 8.63998 9.68667V18.5533C8.63998 18.5766 8.64922 18.5987 8.66539 18.6149C8.68153 18.6311 8.70324 18.64 8.72569 18.64H19.3543C19.3767 18.64 19.3984 18.6311 19.4146 18.6149C19.4307 18.5987 19.44 18.5766 19.44 18.5533V11.46C19.44 11.4367 19.4307 11.4146 19.4146 11.3984C19.3984 11.3823 19.3767 11.3733 19.3543 11.3733H14.04C13.8277 11.3733 13.624 11.2889 13.474 11.1387L11.9369 9.6H8.72569Z"
                                     fill="white"></path></svg><!----><!----><!----><!----></span>Local upload</div>
                                 <!----></span></span></button>
-                            {{ form.file(class_='display-none', id="video_upload_input") }}
+                            <input type="file" class="display-none" id="video_upload_input">
                             <BR></BR>
                             <p id="show_file" style="display:none"></p>
                         </div>
@@ -844,7 +844,9 @@
                         <div data-v-0eccda72="" style="width: 3000px" class="select" id="lg_zh">&nbsp;Mandarin&nbsp;</div>
                         <div><P>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</P></div>
                         <div data-v-0eccda72="" style="width: 3000px" class="" id="lg_en">&nbsp;English&nbsp;</div>
-                        <p>{{ form.language(class_='display-none', id='language_mode') }}</p>
+                        <p>
+                            <input type="text" class="display-none" id="language_mode">
+                        </p>
                     </div>
                 </div>
                 <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">
@@ -875,12 +877,14 @@
                                 <div data-v-ab319272="" style="width: 120px;">A model built by Coderia developers</div>
                             </div>
                         </div>
-                        <p>{{ form.mode(class_='display-none', id='translate_mode') }}</p>
+                        <p>
+                            <input type="text" class="display-none" id="translate_mode">
+                        </p>
                     </div>
                     <div data-v-ab319272="" class="tip"></div>
                 </div>
                 <div class="btn black radius-xl loadmore-btn dz-load-more" style="margin-left: 120px">
-                    {{ form.submit(id="start_process") }}
+                    <input type="submit" id="start_process" value="upload">
                 </div>
             </div>
             <div data-v-3d484ed6="" data-v-21ae2c29="">

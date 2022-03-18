@@ -10,4 +10,5 @@ urlpatterns = [
     path('LoginCheck/', views.LoginCheck, name='LoginCheck'),
     path('CompileCode/', views.CompileCode, name='CompileCode'),
     path('PostNote/', views.PostNote, name='PostNote'),
+    path('NoteDetail/', views.NoteDetail, name='NoteDetail'),
 ]
