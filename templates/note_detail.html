@@ -30,13 +30,11 @@
                                                 <img src="/static/images/blog/large/pic1.jpg" alt="">
                                             </figure>
                                         </div>
-                                        <p>
-                                            {% if note.content_html %}
-                                                {{ note.content_html |safe|striptags }}
-                                            {% else %}
-                                                {{ note.content }}
-                                            {% endif %}
-                                        </p>
+                                        {% if note.content_html %}
+                                            {{ note.content_html |safe }}
+                                        {% else %}
+                                            {{ note.content }}
+                                        {% endif %}
                                     </div>
                                     <div class="dlab-post-tags d-flex">
                                         <div class="post-tags">

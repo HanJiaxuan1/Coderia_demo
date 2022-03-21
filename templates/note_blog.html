@@ -75,13 +75,11 @@
                                                     <a style="font-weight: bold">written
                                                         by {{ note.uid.username }}</a>
                                                 </p>
-                                                <p>
-                                                    {% if note.content_html %}
-                                                        {{ note.content_html | safe | striptags | truncatechars:200 }}
-                                                    {% else %}
-                                                        {{ note.content | truncatechars:150 }}
-                                                    {% endif %}
-                                                </p>
+                                                {% if note.content_html %}
+                                                    {{ note.content_html | safe | truncatechars:200 }}
+                                                {% else %}
+                                                    {{ note.content | truncatechars:150 }}
+                                                {% endif %}
                                                 <a class="btn-link readmore">
                                                     <i class="la la-arrow-right"></i>
                                                 </a>
