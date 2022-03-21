@@ -5,14 +5,15 @@ import sys
 import tempfile
 import time
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # Create your views here.
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from werkzeug.security import generate_password_hash
 
-from note.models import User, Note
+from note.models import User, Note, Category
 
 TempFile = tempfile.mkdtemp(suffix='_test', prefix='python_')
 # 文件名
@@ -140,12 +141,13 @@ def PostNote(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         content_html = request.POST.get('content_html')
+        category = Category.objects.get(name='python')
         if title is None:
             return HttpResponse("0")
         if content is None:
             return HttpResponse("1")
         user = User.objects.get(uid=request.session['uid'])
-        new_note = Note(title=title, content=content, content_html=content_html, uid=user)
+        new_note = Note(title=title, content=content, content_html=content_html, uid=user, category=category)
         new_note.save()
         return HttpResponse("2")
 
@@ -165,4 +167,8 @@ def NoteDetail(request):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    print(request.session['uid'])
+    user = User.objects.get(uid=request.session['uid'])
+    return render(request, 'profile.html', {'user': user})

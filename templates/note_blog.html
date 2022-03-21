@@ -71,7 +71,7 @@
                                                     <a>{{ note.title }}</a>
                                                 </h4>
                                                 <p>
-{#                                                    {{ moment(note.timestamp).fromNow() }} #}
+                                                    {{ note.create_time|timesince }} ago
                                                     <a style="font-weight: bold">written
                                                         by {{ note.uid.username }}</a>
                                                 </p>

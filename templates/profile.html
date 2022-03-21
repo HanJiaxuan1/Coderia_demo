@@ -308,10 +308,10 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="../static/images/category/pic1.jpg" alt="My photo">
+                                    <img src="../static/avatar/{{ user.avatar }}" alt="My photo">
                                 </div>
-                                <h5 class="user-name">user.username</h5>
-                                <h6 class="user-email">user.email</h6>
+                                <h5 class="user-name">{{ user.username }}</h5>
+                                <h6 class="user-email">{{ user.email }}</h6>
                             </div>
                             <div class="about">
                                 <button class="btn btn-sm btn-light border-0"> Edit Photo</button>
@@ -331,7 +331,8 @@
                                 <div class="field">
                                     <label>Username</label>
                                     <label>
-                                        <input placeholder="username" id="username" type="text" value="username"/>
+                                        <input placeholder="username" id="username" type="text"
+                                               value="{{ user.username }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -339,7 +340,7 @@
                                 <div class="field">
                                     <label>Firstname</label>
                                     <label>
-                                        <input id="firstname" type="text" value="first_name"/>
+                                        <input id="firstname" type="text" value="{{ user.first_name }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -347,7 +348,7 @@
                                 <div class="field">
                                     <label>Lastname</label>
                                     <label>
-                                        <input id="lastname" type="text" value="last_name"/>
+                                        <input id="lastname" type="text" value="{{ user.last_name }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -355,7 +356,7 @@
                                 <div class="field">
                                     <label>Birthday</label>
                                     <label>
-                                        <input id="birthday" type="date" value="date_of_birth"/>
+                                        <input id="birthday" type="date" value="{{ user.birthday }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -363,7 +364,7 @@
                                 <div class="field">
                                     <label>Phone</label>
                                     <label>
-                                        <input id="phone" type="text" value="phone"/>
+                                        <input id="phone" type="text" value="{{ user.telephone }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -371,7 +372,7 @@
                                 <div class="field">
                                     <label>Email</label>
                                     <label>
-                                        <input id="email" type="email" value="email"/>
+                                        <input id="email" type="email" value="{{ user.email }}" disabled/>
                                     </label>
                                 </div>
                             </div>
@@ -379,7 +380,7 @@
                                 <div class="field">
                                     <label>Region</label>
                                     <label>
-                                        <input id="region" type="text" value="region"/>
+                                        <input id="region" type="text" value="{{ user.region }}" disabled/>
                                     </label>
                                 </div>
                             </div>
