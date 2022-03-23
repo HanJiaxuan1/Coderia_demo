@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load highlight %}
+
+{% block body %}
+    <div class="page-content bg-white">
+        <div class="content-block">
+            <!-- About Us -->
+            <div class="section-full bg-white content-inner-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+                            <div class="row loadmore-content">
+                                <div class="col-lg-12">
+                                    {% if query %}
+                                        {% for result in page.object_list %}
+                                            <div name="note_detail" class="blog-card blog-md"
+                                                 onclick="window.location.href='{% url 'note:note_detail' result.object.note_id %}'">
+                                                <div class="blog-card-media">
+                                                    <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
+                                                </div>
+                                                <div class="blog-card-info">
+                                                    <h4 class="title">
+                                                        <a>{% highlight result.object.title with query %}</a>
+                                                    </h4>
+                                                    <p>
+                                                        {{ result.object.create_time|timesince }} ago
+                                                        <a style="font-weight: bold">written
+                                                            by {{ result.object.uid.username }}</a>
+                                                    </p>
+                                                    {% if result.object.content_html %}
+                                                        {% highlight result.object.content_html|safe|truncatechars:200 with query %}
+                                                    {% else %}
+                                                        {% highlight result.object.content|truncatechars:150 with query %}
+                                                    {% endif %}
+                                                    <a class="btn-link readmore">
+                                                        <i class="la la-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- About Us End -->
+        </div>
+    </div>
+{% endblock %}

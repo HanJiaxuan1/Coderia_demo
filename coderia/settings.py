@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 用之前先注册
     # 不要忘记写 “,”
+    'haystack',
     'community.apps.CommunityConfig',
     'note.apps.NoteConfig',
     'django.contrib.admin',
@@ -134,3 +135,16 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# 全文检索框架配置
+HAYSTACK_CONNECTIONS = {
+  'default': {
+    # 指定whoosh引擎
+    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+    # 索引文件路径
+    'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+  }
+}
+# 添加此项，当数据库改变时，会自动更新索引，非常方便
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

@@ -423,9 +423,10 @@
 {% endblock %}
 
 
+{% block script %}
 <script>
     $(function () {
-            $(":input").prop('disabled', true)
+            $("input").prop('disabled', true)
                 .keyup(resizeInput)
                 .each(resizeInput);
 
@@ -446,3 +447,5 @@
     );
 
 </script>
+
+{% endblock %}
