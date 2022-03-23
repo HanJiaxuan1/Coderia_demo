@@ -24,7 +24,7 @@ def video_note(request):
 
 
 def code_note(request):
-    if request.session['uid'] is None:
+    if 'uid' not in request.session.keys():
         return redirect(reverse('login'))
     return render(request, 'post.html')
 
