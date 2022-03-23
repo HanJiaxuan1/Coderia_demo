@@ -181,8 +181,6 @@
         html.active .button a.save {
             display: inline-block;
         }
-    </style>
-    <style type="text/css">
 
         .account-settings .user-profile {
             margin: 0 0 1rem 0;
@@ -401,48 +399,47 @@
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <div id="modal-warning" class="modal modal-message modal-warning fade" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-warning"></i>
-                </div>
-                <div class="modal-title"></div>
-
-                <div class="modal-body" id="msgcontent"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">OK</button>
-                </div>
-            </div> <!-- / .modal-content -->
-        </div> <!-- / .modal-dialog -->
+        <div class="row gutters">
+            <!-- BEGIN profile-header-tab -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%">
+                <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item"><a href="#profile-post" class="nav-link active show" data-toggle="tab">NOTES</a>
+                </li>
+                <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">VIDEO NOTES</a></li>
+                <li class="nav-item"><a href="#profile-photos" class="nav-link" data-toggle="tab">COLLECTION</a></li>
+                <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
+            </ul>
+            </div>
+            <!-- END profile-header-tab -->
+        </div>
     </div>
 
 {% endblock %}
 
+{% block script %}
 
-<script>
-    $(function () {
-            $(":input").prop('disabled', true)
-                .keyup(resizeInput)
-                .each(resizeInput);
+    <script>
+        $(function () {
+                $(":input").prop('disabled', true)
+                    .keyup(resizeInput)
+                    .each(resizeInput);
 
-            $('.edit').click(function () {
-                $('html').addClass('active');
-                $('input').prop('disabled', false);
-            });
+                $('.edit').click(function () {
+                    $('html').addClass('active');
+                    $('input').prop('disabled', false);
+                });
 
-            $('.save').click(function () {
-                $('html').removeClass('active');
-                $('input').prop('disabled', true);
-            });
+                $('.save').click(function () {
+                    $('html').removeClass('active');
+                    $('input').prop('disabled', true);
+                });
 
-            function resizeInput() {
-                $(this).attr('size', $(this).val().length + 2);
+                function resizeInput() {
+                    $(this).attr('size', $(this).val().length + 2);
+                }
             }
-        }
-    );
+        );
 
-</script>
+    </script>
+
+{% endblock %}
