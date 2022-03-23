@@ -9,4 +9,5 @@ urlpatterns = [
     path('show_notes/', views.show_notes, name='show_notes'),
     path('note_detail/<note_id>/', views.note_detail, name='note_detail'),
     path('upload_video/', views.upload_video, name='upload_video'),
+    path('code_editor/', views.code_editor, name='code_editor'),
 ]
