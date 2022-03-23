@@ -38,7 +38,6 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/layers.css">
     <!-- REVOLUTION NAVIGATION STYLES -->
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/navigation.css">
-    {#    {{ moment.include_moment() }}#}
     {% block style %}
     {% endblock %}
 
@@ -55,7 +54,7 @@
                     <div class="header-content-bx">
                         <!-- website logo -->
                         <div class="logo-header">
-                            <a href="#"><img src="/static/images/logo.png" alt=""/></a>
+                            <a href="{% url 'index' %}"><img src="/static/images/logo.png" alt=""/></a>
                         </div>
                         <!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end kk" type="button"
@@ -79,7 +78,7 @@
                         </div>
                         <!-- Quik search -->
                         <div class="dlab-quik-search">
-                            <form action="#">
+                            <form action="{% url 'haystack_search' %}">
                                 <input name="search" value="" type="text" class="form-control"
                                        placeholder="enter your keyword ...">
                                 <span id="quik-search-remove"><i class="ti-close"></i></span>

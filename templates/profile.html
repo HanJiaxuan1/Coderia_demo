@@ -416,30 +416,30 @@
 
 {% endblock %}
 
+
 {% block script %}
+<script>
+    $(function () {
+            $("input").prop('disabled', true)
+                .keyup(resizeInput)
+                .each(resizeInput);
 
-    <script>
-        $(function () {
-                $(":input").prop('disabled', true)
-                    .keyup(resizeInput)
-                    .each(resizeInput);
+            $('.edit').click(function () {
+                $('html').addClass('active');
+                $('input').prop('disabled', false);
+            });
 
-                $('.edit').click(function () {
-                    $('html').addClass('active');
-                    $('input').prop('disabled', false);
-                });
+            $('.save').click(function () {
+                $('html').removeClass('active');
+                $('input').prop('disabled', true);
+            });
 
-                $('.save').click(function () {
-                    $('html').removeClass('active');
-                    $('input').prop('disabled', true);
-                });
-
-                function resizeInput() {
-                    $(this).attr('size', $(this).val().length + 2);
-                }
+            function resizeInput() {
+                $(this).attr('size', $(this).val().length + 2);
             }
-        );
+        }
+    );
 
-    </script>
+</script>
 
 {% endblock %}
