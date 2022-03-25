@@ -741,213 +741,228 @@
     <script charset="utf-8" src="/static/js/chunk-548a1e87.66aee21e.js"></script>
 </head>
 <body>
-<form action="" method="post" enctype="multipart/form-data" nonvalidate>
-    <div data-v-937cba2a="" data-v-37158ef0="">
-        <div data-v-21ae2c29="" data-v-937cba2a="" class="content-block" style="top: 55px">
-            {% csrf_token %}
-            <div data-v-21ae2c29="" class="top-title" style="width:400px; font-family: 'Segoe UI Black',serif;font-size:25px">Video or audio to text notes</div>
-            <div data-v-21ae2c29="" class="left-box">
-                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">
-                    <div data-v-154ce747="" class="order">1</div>
-                    <div data-v-154ce747="">Select video or audio file please</div>
-                </div>
-                <div data-v-21ae2c29="" class="uploader-box">
-                    <div data-v-480611ca="" data-v-21ae2c29="">
-                        <div data-v-1067f382="" data-v-480611ca="" id="center-icon" class="center-icon local-uploader">
-                            <div data-v-6088c81a="" data-v-1067f382="" class="drag-area drag-area"
-                                 style="display: none;">
-                                <img data-v-6088c81a="" src="/static/images/dashes.01169751.svg"><span
-                                    data-v-6088c81a="">Drag it inside the dotted line to upload</span></div>
-                            <div data-v-1067f382="" id="container" style="position: relative;">
-                                <div data-v-1067f382="" id="selectfiles" style="position: relative; z-index: 1;"></div>
-                                <div id="html5_1ftjp8343o14r7pco11egr1pij4_container"
-                                     class="moxie-shim moxie-shim-html5"
-                                     style="position: absolute; top: 0px; left: 0px; width: 438px; height: 0px; overflow: hidden; z-index: 0;">
-                                    <input id="html5_1ftjp8343o14r7pco11egr1pij4" type="file"
-                                           style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-                                           multiple="" accept=".mp4,.mkv,.avi,.wmv,.flv,.3gp,.mov,.mp3,.m4a"
-                                           tabindex="-1">
-                                </div>
-                            </div>
-                        </div>
+{#<form action="" method="post" enctype="multipart/form-data" nonvalidate>#}
+{#    <div data-v-937cba2a="" data-v-37158ef0="">#}
+{#        <div data-v-21ae2c29="" data-v-937cba2a="" class="content-block" style="top: 55px">#}
+{#            {% csrf_token %}#}
+{#            <div data-v-21ae2c29="" class="top-title" style="width:400px; font-family: 'Segoe UI Black',serif;font-size:25px">Video or audio to text notes</div>#}
+{#            <div data-v-21ae2c29="" class="left-box">#}
+{#                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">#}
+{#                    <div data-v-154ce747="" class="order">1</div>#}
+{#                    <div data-v-154ce747="">Select video or audio file please</div>#}
+{#                </div>#}
+{#                <div data-v-21ae2c29="" class="uploader-box">#}
+{#                    <div data-v-480611ca="" data-v-21ae2c29="">#}
+{#                        <div data-v-1067f382="" data-v-480611ca="" id="center-icon" class="center-icon local-uploader">#}
+{#                            <div data-v-6088c81a="" data-v-1067f382="" class="drag-area drag-area"#}
+{#                                 style="display: none;">#}
+{#                                <img data-v-6088c81a="" src="/static/images/dashes.01169751.svg"><span#}
+{#                                    data-v-6088c81a="">Drag it inside the dotted line to upload</span></div>#}
+{#                            <div data-v-1067f382="" id="container" style="position: relative;">#}
+{#                                <div data-v-1067f382="" id="selectfiles" style="position: relative; z-index: 1;"></div>#}
+{#                                <div id="html5_1ftjp8343o14r7pco11egr1pij4_container"#}
+{#                                     class="moxie-shim moxie-shim-html5"#}
+{#                                     style="position: absolute; top: 0px; left: 0px; width: 438px; height: 0px; overflow: hidden; z-index: 0;">#}
+{#                                    <input id="html5_1ftjp8343o14r7pco11egr1pij4" type="file"#}
+{#                                           style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"#}
+{#                                           multiple="" accept=".mp4,.mkv,.avi,.wmv,.flv,.3gp,.mov,.mp3,.m4a"#}
+{#                                           tabindex="-1">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div data-v-480611ca="" class="uploader-title"> Drag the video or audio here or upload it in the following way（<span data-v-480611ca="">支持格式#}
+{#                                <div data-v-6ba443a8="" data-v-480611ca="" class="info-box info">#}
+{#                                    <svg data-v-6ba443a8="" width="16" height="16" viewBox="0 0 16 16" fill="none"#}
+{#                                         xmlns="http://www.w3.org/2000/svg" class="info-icon">#}
+{#                                        <path d="M7.99992 1.3335C4.32392 1.3335 1.33325 4.32416 1.33325 8.00016C1.33325 11.6762 4.32392 14.6668 7.99992 14.6668C11.6759 14.6668 14.6666 11.6762 14.6666 8.00016C14.6666 4.32416 11.6759 1.3335 7.99992 1.3335ZM7.99992 13.3335C5.05925 13.3335 2.66659 10.9408 2.66659 8.00016C2.66659 5.0595 5.05925 2.66683 7.99992 2.66683C10.9406 2.66683 13.3333 5.0595 13.3333 8.00016C13.3333 10.9408 10.9406 13.3335 7.99992 13.3335Z"#}
+{#                                              fill="currentColor"></path>#}
+{#                                        <path d="M7.33325 7.33317H8.66658V11.3332H7.33325V7.33317ZM7.33325 4.6665H8.66658V5.99984H7.33325V4.6665Z"#}
+{#                                              fill="currentColor"></path>#}
+{#                                    </svg>#}
+{#                                    <div data-v-4b2bdac8="" data-v-6ba443a8="" class="prompt-box info-txt"#}
+{#                                         style="width: 175px; height: 154px; background: rgb(176, 134, 91); display: none;">#}
+{#                                        <div data-v-4b2bdac8="" class="bar"#}
+{#                                             style="left: 11%; top: -3%; background: rgb(176, 134, 91);"></div>#}
+{#                                        <div data-v-4b2bdac8="" class="prompt-slot" style="height: 95px;">#}
+{#                                            <div data-v-6ba443a8="" data-v-4b2bdac8="" class="info-slot">#}
+{#                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Supported formats：</div>#}
+{#                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Audio：mp3, m4a</div>#}
+{#                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Video：mov, mp4, mkv, avi, wmv, flv, 3gp#}
+{#                                                </div>#}
+{#                                                <div data-v-6ba443a8="" data-v-4b2bdac8="" class="multi-upload">#}
+{#                                                    <div data-v-6ba443a8="" data-v-4b2bdac8=""><span data-v-6ba443a8=""#}
+{#                                                                                                     data-v-4b2bdac8="">Batch upload:</span>#}
+{#                                                    </div>#}
+{#                                                    <div data-v-6ba443a8="" data-v-4b2bdac8="">A maximum of 15 files can be uploaded synchronously</div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </span>）#}
+{#                        </div><!--fragment#581dac2e1a#head-->#}
+{##}
+{##}
+{#                        <div data-v-eeb6d02e="" data-v-7ef60b84="" class="uploader-modes" fragment="581dac2e1a">#}
+{#                            <button id="video_upload" data-v-0385d239="" data-v-eeb6d02e="" type="button"#}
+{#                                    class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default btn_argus_brown"#}
+{#                                    style="height: 44px; min-height: 44px; max-height: 44px; padding: unset;"><span#}
+{#                                    class="v-btn__content"><span data-v-0385d239="" class="btn_box"><!----><div#}
+{#                                    data-v-eeb6d02e="" class="folder"><span data-v-7a585863="" data-v-eeb6d02e=""#}
+{#                                                                            style="display: flex; justify-content: center; align-items: center;"><svg#}
+{#                                    data-v-7a585863="" width="28" height="28" viewBox="0 0 28 28" fill="none"#}
+{#                                    xmlns="http://www.w3.org/2000/svg"><circle data-v-7a585863="" cx="14" cy="14" r="14"#}
+{#                                                                               fill="#B0865B"></circle><path#}
+{#                                    data-v-7a585863="" fill-rule="evenodd" clip-rule="evenodd"#}
+{#                                    d="M7.53341 8.49432C7.84947 8.17791 8.27834 8 8.72569 8H12.2685C12.4809 8 12.6845 8.0844 12.8345 8.23462L14.3716 9.77333H19.3543C19.8016 9.77333 20.2305 9.95124 20.5465 10.2677C20.8626 10.584 21.04 11.0129 21.04 11.46V18.5533C21.04 19.0004 20.8626 19.4293 20.5465 19.7457C20.2305 20.0621 19.8016 20.24 19.3543 20.24H8.72569C8.27833 20.24 7.84947 20.0621 7.53341 19.7457C7.21737 19.4293 7.03998 19.0004 7.03998 18.5533V9.68667C7.03998 9.23961 7.21737 8.81069 7.53341 8.49432ZM8.72569 9.6C8.70324 9.6 8.68153 9.60892 8.66539 9.62508C8.64922 9.64127 8.63998 9.6634 8.63998 9.68667V18.5533C8.63998 18.5766 8.64922 18.5987 8.66539 18.6149C8.68153 18.6311 8.70324 18.64 8.72569 18.64H19.3543C19.3767 18.64 19.3984 18.6311 19.4146 18.6149C19.4307 18.5987 19.44 18.5766 19.44 18.5533V11.46C19.44 11.4367 19.4307 11.4146 19.4146 11.3984C19.3984 11.3823 19.3767 11.3733 19.3543 11.3733H14.04C13.8277 11.3733 13.624 11.2889 13.474 11.1387L11.9369 9.6H8.72569Z"#}
+{#                                    fill="white"></path></svg><!----><!----><!----><!----></span>Local upload</div>#}
+{#                                <!----></span></span></button>#}
+{#                            <input type="file" class="display-none" id="video_upload_input">#}
+{#                            <BR></BR>#}
+{#                            <p id="show_file" style="display:none"></p>#}
+{#                        </div>#}
+{#                        <div data-v-73c14273="" data-v-7ef60b84="" role="dialog" class="v-dialog__container"#}
+{#                             fragment="581dac2e1a"><!----></div>#}
+{#                        <div data-v-d3ebba92="" data-v-7ef60b84="" role="dialog" class="v-dialog__container"#}
+{#                             fragment="581dac2e1a"><!----></div>#}
+{#                        <div data-v-0416294e="" data-v-7ef60b84="" role="dialog" class="v-dialog__container dialog-box"#}
+{#                             fragment="581dac2e1a"><!----></div><!--fragment#581dac2e1a#tail-->#}
+{#                        <div data-v-c0522848="" data-v-480611ca="" class="flex-center"><img data-v-c0522848=""#}
+{#                                                                                            src="/static/images/coffee-machine_loading.896b67b9.gif"#}
+{#                                                                                            class="default-img"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div data-v-21ae2c29="" class="right-box">#}
+{#                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">#}
+{#                    <div data-v-154ce747="" class="order">2</div>#}
+{#                    <div data-v-154ce747="">Select Language</div>#}
+{#                </div>#}
+{#                <div data-v-0eccda72="" data-v-21ae2c29="" class="outter">#}
+{#                    <div data-v-0eccda72="" class="lg">#}
+{#                        <div data-v-0eccda72="" style="width: 3000px" class="select" id="lg_zh">&nbsp;Mandarin&nbsp;</div>#}
+{#                        <div><P>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</P></div>#}
+{#                        <div data-v-0eccda72="" style="width: 3000px" class="" id="lg_en">&nbsp;English&nbsp;</div>#}
+{#                        <p>#}
+{#                            <input type="text" class="display-none" id="language_mode">#}
+{#                        </p>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">#}
+{#                    <div data-v-154ce747="" class="order">3</div>#}
+{#                    <div data-v-154ce747="">Select voice parsing mode</div>#}
+{#                    <svg data-v-21ae2c29="" width="16" height="16" viewBox="0 0 16 16" fill="none"#}
+{#                         xmlns="http://www.w3.org/2000/svg" class="info-icon" data-v-154ce747=""#}
+{#                         style="color: rgb(204, 201, 198);">#}
+{#                        <path d="M7.99992 1.3335C4.32392 1.3335 1.33325 4.32416 1.33325 8.00016C1.33325 11.6762 4.32392 14.6668 7.99992 14.6668C11.6759 14.6668 14.6666 11.6762 14.6666 8.00016C14.6666 4.32416 11.6759 1.3335 7.99992 1.3335ZM7.99992 13.3335C5.05925 13.3335 2.66659 10.9408 2.66659 8.00016C2.66659 5.0595 5.05925 2.66683 7.99992 2.66683C10.9406 2.66683 13.3333 5.0595 13.3333 8.00016C13.3333 10.9408 10.9406 13.3335 7.99992 13.3335Z"#}
+{#                              fill="currentColor"></path>#}
+{#                        <path d="M7.33325 7.33317H8.66658V11.3332H7.33325V7.33317ZM7.33325 4.6665H8.66658V5.99984H7.33325V4.6665Z"#}
+{#                              fill="currentColor"></path>#}
+{#                    </svg>#}
+{#                </div>#}
+{#                <div data-v-ab319272="" data-v-21ae2c29="" class="outter">#}
+{#                    <div data-v-ab319272="" class="content">#}
+{#                        <div data-v-ab319272="" class="select" id="api_mode">#}
+{#                            <div data-v-ab319272="" class="recommend" style="width: 100px">Recommend</div>#}
+{#                            <div data-v-ab319272="" class="tit">API Mode</div>#}
+{#                            <div data-v-ab319272="" class="icon-box">#}
+{#                                <div data-v-ab319272="" style="width: 120px; padding-left:5px">Faster and More accurate</div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div data-v-ab319272="" class="" id="nlp_mode">#}
+{#                            <div data-v-ab319272="" class="tit">NLP Mode</div>#}
+{##}
+{#                            <div data-v-ab319272="" class="icon-box">#}
+{#                                <div data-v-ab319272="" style="width: 120px;">A model built by Coderia developers</div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <p>#}
+{#                            <input type="text" class="display-none" id="translate_mode">#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <div data-v-ab319272="" class="tip"></div>#}
+{#                </div>#}
+{#                <div class="btn black radius-xl loadmore-btn dz-load-more" style="margin-left: 120px">#}
+{#                    <input type="submit" id="start_process" value="upload">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div data-v-3d484ed6="" data-v-21ae2c29="">#}
+{#                <div data-v-3d484ed6="" role="dialog" class="v-dialog__container"><!----></div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}
 
-                        <div data-v-480611ca="" class="uploader-title"> Drag the video or audio here or upload it in the following way（<span data-v-480611ca="">支持格式
-                                <div data-v-6ba443a8="" data-v-480611ca="" class="info-box info">
-                                    <svg data-v-6ba443a8="" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg" class="info-icon">
-                                        <path d="M7.99992 1.3335C4.32392 1.3335 1.33325 4.32416 1.33325 8.00016C1.33325 11.6762 4.32392 14.6668 7.99992 14.6668C11.6759 14.6668 14.6666 11.6762 14.6666 8.00016C14.6666 4.32416 11.6759 1.3335 7.99992 1.3335ZM7.99992 13.3335C5.05925 13.3335 2.66659 10.9408 2.66659 8.00016C2.66659 5.0595 5.05925 2.66683 7.99992 2.66683C10.9406 2.66683 13.3333 5.0595 13.3333 8.00016C13.3333 10.9408 10.9406 13.3335 7.99992 13.3335Z"
-                                              fill="currentColor"></path>
-                                        <path d="M7.33325 7.33317H8.66658V11.3332H7.33325V7.33317ZM7.33325 4.6665H8.66658V5.99984H7.33325V4.6665Z"
-                                              fill="currentColor"></path>
-                                    </svg>
-                                    <div data-v-4b2bdac8="" data-v-6ba443a8="" class="prompt-box info-txt"
-                                         style="width: 175px; height: 154px; background: rgb(176, 134, 91); display: none;">
-                                        <div data-v-4b2bdac8="" class="bar"
-                                             style="left: 11%; top: -3%; background: rgb(176, 134, 91);"></div>
-                                        <div data-v-4b2bdac8="" class="prompt-slot" style="height: 95px;">
-                                            <div data-v-6ba443a8="" data-v-4b2bdac8="" class="info-slot">
-                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Supported formats：</div>
-                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Audio：mp3, m4a</div>
-                                                <div data-v-6ba443a8="" data-v-4b2bdac8="">Video：mov, mp4, mkv, avi, wmv, flv, 3gp
-                                                </div>
-                                                <div data-v-6ba443a8="" data-v-4b2bdac8="" class="multi-upload">
-                                                    <div data-v-6ba443a8="" data-v-4b2bdac8=""><span data-v-6ba443a8=""
-                                                                                                     data-v-4b2bdac8="">Batch upload:</span>
-                                                    </div>
-                                                    <div data-v-6ba443a8="" data-v-4b2bdac8="">A maximum of 15 files can be uploaded synchronously</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </span>）
-                        </div><!--fragment#581dac2e1a#head-->
+<form action="" method="post" novalidate enctype="multipart/form-data">
+    <input type="file" name="file" >
+    <label>language:</label>
+    <input type="radio" name = 'language' value="English" checked><label>English</label>
+    <input name="language" type="radio" value="Chinese"><label>Chinese</label>
 
+    <label>mode:</label>
+    <input type="radio" name = 'mode' value="API" checked><label>API</label>
+    <input name="mode" type="radio" value="NLP"><label>NLP Model</label>
 
-                        <div data-v-eeb6d02e="" data-v-7ef60b84="" class="uploader-modes" fragment="581dac2e1a">
-                            <button id="video_upload" data-v-0385d239="" data-v-eeb6d02e="" type="button"
-                                    class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default btn_argus_brown"
-                                    style="height: 44px; min-height: 44px; max-height: 44px; padding: unset;"><span
-                                    class="v-btn__content"><span data-v-0385d239="" class="btn_box"><!----><div
-                                    data-v-eeb6d02e="" class="folder"><span data-v-7a585863="" data-v-eeb6d02e=""
-                                                                            style="display: flex; justify-content: center; align-items: center;"><svg
-                                    data-v-7a585863="" width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"><circle data-v-7a585863="" cx="14" cy="14" r="14"
-                                                                               fill="#B0865B"></circle><path
-                                    data-v-7a585863="" fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M7.53341 8.49432C7.84947 8.17791 8.27834 8 8.72569 8H12.2685C12.4809 8 12.6845 8.0844 12.8345 8.23462L14.3716 9.77333H19.3543C19.8016 9.77333 20.2305 9.95124 20.5465 10.2677C20.8626 10.584 21.04 11.0129 21.04 11.46V18.5533C21.04 19.0004 20.8626 19.4293 20.5465 19.7457C20.2305 20.0621 19.8016 20.24 19.3543 20.24H8.72569C8.27833 20.24 7.84947 20.0621 7.53341 19.7457C7.21737 19.4293 7.03998 19.0004 7.03998 18.5533V9.68667C7.03998 9.23961 7.21737 8.81069 7.53341 8.49432ZM8.72569 9.6C8.70324 9.6 8.68153 9.60892 8.66539 9.62508C8.64922 9.64127 8.63998 9.6634 8.63998 9.68667V18.5533C8.63998 18.5766 8.64922 18.5987 8.66539 18.6149C8.68153 18.6311 8.70324 18.64 8.72569 18.64H19.3543C19.3767 18.64 19.3984 18.6311 19.4146 18.6149C19.4307 18.5987 19.44 18.5766 19.44 18.5533V11.46C19.44 11.4367 19.4307 11.4146 19.4146 11.3984C19.3984 11.3823 19.3767 11.3733 19.3543 11.3733H14.04C13.8277 11.3733 13.624 11.2889 13.474 11.1387L11.9369 9.6H8.72569Z"
-                                    fill="white"></path></svg><!----><!----><!----><!----></span>Local upload</div>
-                                <!----></span></span></button>
-                            <input type="file" class="display-none" id="video_upload_input">
-                            <BR></BR>
-                            <p id="show_file" style="display:none"></p>
-                        </div>
-                        <div data-v-73c14273="" data-v-7ef60b84="" role="dialog" class="v-dialog__container"
-                             fragment="581dac2e1a"><!----></div>
-                        <div data-v-d3ebba92="" data-v-7ef60b84="" role="dialog" class="v-dialog__container"
-                             fragment="581dac2e1a"><!----></div>
-                        <div data-v-0416294e="" data-v-7ef60b84="" role="dialog" class="v-dialog__container dialog-box"
-                             fragment="581dac2e1a"><!----></div><!--fragment#581dac2e1a#tail-->
-                        <div data-v-c0522848="" data-v-480611ca="" class="flex-center"><img data-v-c0522848=""
-                                                                                            src="/static/images/coffee-machine_loading.896b67b9.gif"
-                                                                                            class="default-img"></div>
-                    </div>
-                </div>
-            </div>
-            <div data-v-21ae2c29="" class="right-box">
-                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">
-                    <div data-v-154ce747="" class="order">2</div>
-                    <div data-v-154ce747="">Select Language</div>
-                </div>
-                <div data-v-0eccda72="" data-v-21ae2c29="" class="outter">
-                    <div data-v-0eccda72="" class="lg">
-                        <div data-v-0eccda72="" style="width: 3000px" class="select" id="lg_zh">&nbsp;Mandarin&nbsp;</div>
-                        <div><P>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</P></div>
-                        <div data-v-0eccda72="" style="width: 3000px" class="" id="lg_en">&nbsp;English&nbsp;</div>
-                        <p>
-                            <input type="text" class="display-none" id="language_mode">
-                        </p>
-                    </div>
-                </div>
-                <div data-v-154ce747="" data-v-21ae2c29="" class="title item-title">
-                    <div data-v-154ce747="" class="order">3</div>
-                    <div data-v-154ce747="">Select voice parsing mode</div>
-                    <svg data-v-21ae2c29="" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                         xmlns="http://www.w3.org/2000/svg" class="info-icon" data-v-154ce747=""
-                         style="color: rgb(204, 201, 198);">
-                        <path d="M7.99992 1.3335C4.32392 1.3335 1.33325 4.32416 1.33325 8.00016C1.33325 11.6762 4.32392 14.6668 7.99992 14.6668C11.6759 14.6668 14.6666 11.6762 14.6666 8.00016C14.6666 4.32416 11.6759 1.3335 7.99992 1.3335ZM7.99992 13.3335C5.05925 13.3335 2.66659 10.9408 2.66659 8.00016C2.66659 5.0595 5.05925 2.66683 7.99992 2.66683C10.9406 2.66683 13.3333 5.0595 13.3333 8.00016C13.3333 10.9408 10.9406 13.3335 7.99992 13.3335Z"
-                              fill="currentColor"></path>
-                        <path d="M7.33325 7.33317H8.66658V11.3332H7.33325V7.33317ZM7.33325 4.6665H8.66658V5.99984H7.33325V4.6665Z"
-                              fill="currentColor"></path>
-                    </svg>
-                </div>
-                <div data-v-ab319272="" data-v-21ae2c29="" class="outter">
-                    <div data-v-ab319272="" class="content">
-                        <div data-v-ab319272="" class="select" id="api_mode">
-                            <div data-v-ab319272="" class="recommend" style="width: 100px">Recommend</div>
-                            <div data-v-ab319272="" class="tit">API Mode</div>
-                            <div data-v-ab319272="" class="icon-box">
-                                <div data-v-ab319272="" style="width: 120px; padding-left:5px">Faster and More accurate</div>
-                            </div>
-                        </div>
-                        <div data-v-ab319272="" class="" id="nlp_mode">
-                            <div data-v-ab319272="" class="tit">NLP Mode</div>
+    <input type="submit" value="Submit">
 
-                            <div data-v-ab319272="" class="icon-box">
-                                <div data-v-ab319272="" style="width: 120px;">A model built by Coderia developers</div>
-                            </div>
-                        </div>
-                        <p>
-                            <input type="text" class="display-none" id="translate_mode">
-                        </p>
-                    </div>
-                    <div data-v-ab319272="" class="tip"></div>
-                </div>
-                <div class="btn black radius-xl loadmore-btn dz-load-more" style="margin-left: 120px">
-                    <input type="submit" id="start_process" value="upload">
-                </div>
-            </div>
-            <div data-v-3d484ed6="" data-v-21ae2c29="">
-                <div data-v-3d484ed6="" role="dialog" class="v-dialog__container"><!----></div>
-            </div>
-        </div>
-    </div>
 </form>
+
 <script>
-    let inputEl = document.getElementById('video_upload_input');
-    let show_file = document.getElementById('show_file');
-    let start_process = document.getElementById('start_process');
-    let translate_mode = document.getElementById('translate_mode');
-    let language_mode = document.getElementById('language_mode');
-    translate_mode.value = 'api';
-    language_mode.value = 'Chinese';
-
-
-    inputEl.addEventListener('change', e => {
-        if (inputEl.files.length === 0) {
-            alert("Please choose a file!");
-            show_file.style.display = 'none';
-            start_process.disabled = true;
-            return;
-        }
-        start_process.disabled = false;
-        let file = inputEl.files[0];
-        show_file.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + file.name;
-        show_file.style.display = 'block';
-    });
-    $("#video_upload").click(function () {
-        inputEl.click();
-    });
-
-    let lg_zh = document.getElementById('lg_zh');
-    let lg_en = document.getElementById('lg_en');
-
-    lg_zh.addEventListener('click', e => {
-        lg_zh.className = "select";
-        lg_en.className = "";
-        language_mode.value = 'Chinese';
-    });
-
-    lg_en.addEventListener('click', e => {
-        lg_en.className = "select";
-        lg_zh.className = "";
-        language_mode.value = 'English';
-    });
-
-    let api_mode = document.getElementById('api_mode');
-    let nlp_mode = document.getElementById('nlp_mode');
-
-    api_mode.addEventListener('click', e => {
-        api_mode.className = "select";
-        nlp_mode.className = "";
-        translate_mode.value = 'api';
-    });
-
-    nlp_mode.addEventListener('click', e => {
-        nlp_mode.className = "select";
-        api_mode.className = "";
-        translate_mode.value = 'nlp';
-    });
+    {#let inputEl = document.getElementById('video_upload_input');#}
+    {#let show_file = document.getElementById('show_file');#}
+    {#let start_process = document.getElementById('start_process');#}
+    {#let translate_mode = document.getElementById('translate_mode');#}
+    {#let language_mode = document.getElementById('language_mode');#}
+    {#translate_mode.value = 'api';#}
+    {#language_mode.value = 'Chinese';#}
+    {##}
+    {##}
+    {#inputEl.addEventListener('change', e => {#}
+    {#    if (inputEl.files.length === 0) {#}
+    {#        alert("Please choose a file!");#}
+    {#        show_file.style.display = 'none';#}
+    {#        start_process.disabled = true;#}
+    {#        return;#}
+    {#    }#}
+    {#    start_process.disabled = false;#}
+    {#    let file = inputEl.files[0];#}
+    {#    show_file.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + file.name;#}
+    {#    show_file.style.display = 'block';#}
+    {# });#}
+    {#$("#video_upload").click(function () {#}
+    {#    inputEl.click();#}
+    {# });#}
+    {##}
+    {#let lg_zh = document.getElementById('lg_zh');#}
+    {#let lg_en = document.getElementById('lg_en');#}
+    {##}
+    {#lg_zh.addEventListener('click', e => {#}
+    {#    lg_zh.className = "select";#}
+    {#    lg_en.className = "";#}
+    {#    language_mode.value = 'Chinese';#}
+    {# });#}
+    {##}
+    {#lg_en.addEventListener('click', e => {#}
+    {#    lg_en.className = "select";#}
+    {#    lg_zh.className = "";#}
+    {#    language_mode.value = 'English';#}
+    {# });#}
+    {##}
+    {#let api_mode = document.getElementById('api_mode');#}
+    {#let nlp_mode = document.getElementById('nlp_mode');#}
+    {##}
+    {#api_mode.addEventListener('click', e => {#}
+    {#    api_mode.className = "select";#}
+    {#    nlp_mode.className = "";#}
+    {#    translate_mode.value = 'api';#}
+    {# });#}
+    {##}
+    {#nlp_mode.addEventListener('click', e => {#}
+    {#    nlp_mode.className = "select";#}
+    {#    api_mode.className = "";#}
+    {#    translate_mode.value = 'nlp';#}
+    {# });#}
 
 
 </script>
