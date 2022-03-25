@@ -399,47 +399,139 @@
                 </div>
             </div>
         </div>
-        <div class="row gutters">
-            <!-- BEGIN profile-header-tab -->
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%">
-                <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="#profile-post" class="nav-link active show" data-toggle="tab">NOTES</a>
+
+        <div class="col-12" style="margin-top: 3%">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                       role="tab" aria-controls="pills-home" aria-selected="true">My Notes</a>
                 </li>
-                <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">VIDEO NOTES</a></li>
-                <li class="nav-item"><a href="#profile-photos" class="nav-link" data-toggle="tab">COLLECTION</a></li>
-                <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                       aria-controls="pills-profile" aria-selected="false">My Video Notes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                       aria-controls="pills-contact" aria-selected="false">My Code Notes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                       aria-controls="pills-contact" aria-selected="false">Liked Notes</a>
+                </li>
             </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="p-3 border mb-3">
+                        <div name="note_detail" class="blog-card blog-md">
+                            <div class="blog-card-media">
+                                <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
+                            </div>
+                            <div class="blog-card-info">
+                                <h4 class="title">
+                                    <a>{{ note.title }}</a>
+                                </h4>
+                                <p>
+                                    {{ note.create_time|timesince }} ago
+                                    <a style="font-weight: bold">written
+                                        by {{ note.uid.username }}</a>
+                                </p>
+                                {% if note.content_html %}
+                                    {{ note.content_html | safe | truncatechars:200 }}
+                                {% else %}
+                                    {{ note.content | truncatechars:150 }}
+                                {% endif %}
+                                <a class="btn-link readmore">
+                                    <i class="la la-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="p-3 border mb-3">
+                        <div name="note_detail" class="blog-card blog-md">
+                            <div class="blog-card-media">
+                                <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
+                            </div>
+                            <div class="blog-card-info">
+                                <h4 class="title">
+                                    <a>{{ note.title }}</a>
+                                </h4>
+                                <p>
+                                    {{ note.create_time|timesince }} ago
+                                    <a style="font-weight: bold">written
+                                        by {{ note.uid.username }}</a>
+                                </p>
+                                {% if note.content_html %}
+                                    {{ note.content_html | safe | truncatechars:200 }}
+                                {% else %}
+                                    {{ note.content | truncatechars:150 }}
+                                {% endif %}
+                                <a class="btn-link readmore">
+                                    <i class="la la-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="p-3 border mb-3">
+                        <div name="note_detail" class="blog-card blog-md">
+                            <div class="blog-card-media">
+                                <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
+                            </div>
+                            <div class="blog-card-info">
+                                <h4 class="title">
+                                    <a>{{ note.title }}</a>
+                                </h4>
+                                <p>
+                                    {{ note.create_time|timesince }} ago
+                                    <a style="font-weight: bold">written
+                                        by {{ note.uid.username }}</a>
+                                </p>
+                                {% if note.content_html %}
+                                    {{ note.content_html | safe | truncatechars:200 }}
+                                {% else %}
+                                    {{ note.content | truncatechars:150 }}
+                                {% endif %}
+                                <a class="btn-link readmore">
+                                    <i class="la la-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- END profile-header-tab -->
         </div>
+        <!-- END profile-header-tab -->
     </div>
 
 {% endblock %}
 
 
 {% block script %}
-<script>
-    $(function () {
-            $("input").prop('disabled', true)
-                .keyup(resizeInput)
-                .each(resizeInput);
+    <script>
+        $(function () {
+                $("input").prop('disabled', true)
+                    .keyup(resizeInput)
+                    .each(resizeInput);
 
-            $('.edit').click(function () {
-                $('html').addClass('active');
-                $('input').prop('disabled', false);
-            });
+                $('.edit').click(function () {
+                    $('html').addClass('active');
+                    $('input').prop('disabled', false);
+                });
 
-            $('.save').click(function () {
-                $('html').removeClass('active');
-                $('input').prop('disabled', true);
-            });
+                $('.save').click(function () {
+                    $('html').removeClass('active');
+                    $('input').prop('disabled', true);
+                });
 
-            function resizeInput() {
-                $(this).attr('size', $(this).val().length + 2);
+                function resizeInput() {
+                    $(this).attr('size', $(this).val().length + 2);
+                }
             }
-        }
-    );
+        );
 
-</script>
+    </script>
 
 {% endblock %}
