@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from note.API import file_convert, file_preprocessing, English, Chinese
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 # 创建临时文件夹,返回临时文件夹路径
@@ -19,8 +19,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from werkzeug import Response
 
-from note.models import Note, User, Video
-
+from note.models import *
 
 def video_note(request):
     return render(request, 'codeEditor.html')
@@ -38,8 +37,42 @@ def show_notes(request):
 
 
 def note_detail(request, note_id):
+    # 测试环境
+    request.session['uid'] = 1
     find_note = Note.objects.get(note_id=note_id)
-    return render(request, 'note_detail.html', {'note': find_note})
+    # 多个放回值时不能用get
+    comments = Comment.objects.filter(note_id = note_id).all()
+    return render(request, 'note_detail.html', {'note': find_note, 'comment_list': comments })
+
+
+def save_comment(request):
+    if request.session.get("uid") is None:
+        return HttpResponse("0")
+    user = User.objects.get(uid=request.session['uid'])
+    content = request.POST.get("content")
+    note_id = request.POST.get("note_id")
+    note = Note.objects.get(note_id=note_id)
+    comment = Comment(uid=user, content=content, note_id = note)
+    comment.save()
+    return HttpResponse("1")
+
+
+def get_reply(request):
+    cid = request.POST.get("cid")
+    replys = Reply.objects.filter(cid = cid).all()
+    list = []
+    for item in replys:
+        reply = {
+            'username' : item.uid.username,
+            'time': item.create_time,
+            'content': item.content,
+        }
+        list.append(reply)
+    dict = {'data': list, 'length': len(list)}
+    # 这里的问题是直接用HttpResponse传，QuerySet的长度会被异常识别。
+    # replys是QuerySet类型的变量而不是dic
+    return JsonResponse(dict)
+
 
 
 def upload_video(request):
