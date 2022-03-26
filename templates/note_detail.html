@@ -110,90 +110,27 @@
                                         <h6 class="comments-title">8 Comments</h6>
                                         <div>
                                             <!-- comment list END -->
+                                            {% for comment in comment_list %}
                                             <ol class="comment-list">
                                                 <li class="comment">
                                                     <div class="comment-body">
                                                         <div class="comment-author vcard"><img class="avatar photo"
                                                                                                src="/static/images/testimonials/pic1.jpg"
-                                                                                               alt=""> <cite class="fn">Kelsey
-                                                            Holmes</cite> <span class="says">says:</span></div>
-                                                        <div class="comment-meta"><a href="javascript:void(0);">October
-                                                            6, 2020 at 7:15 am</a></div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                            vitae neqnsectetur adipiscing elit. Nam viae neqnsectetur
-                                                            adipiscing elit.
-                                                            Nam vitae neque vitae sapien malesuada aliquet. </p>
+                                                                                               alt=""> <cite class="fn">{{  comment.uid.username  }}
+                                                        </cite> <span class="says">says:</span></div>
+                                                        <div class="comment-meta"><a href="javascript:void(0);">{{  comment.create_time|timesince  }} Ago</a></div>
+                                                        <p>{{  comment.content  }}</p>
                                                         <div class="reply"><a href="javascript:void(0);"
                                                                               class="comment-reply-link">Reply</a></div>
                                                     </div>
-                                                    <ol class="children">
-                                                        <li class="comment odd parent">
-                                                            <div class="comment-body">
-                                                                <div class="comment-author vcard"><img
-                                                                        class="avatar photo"
-                                                                        src="/static/images/testimonials/pic2.jpg"
-                                                                        alt=""> <cite class="fn">Stacy poe</cite> <span
-                                                                        class="says">says:</span></div>
-                                                                <div class="comment-meta"><a href="javascript:void(0);">October
-                                                                    6, 2020 at 7:15 am</a></div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit. Nam vitae neque vitae sapien malesuada
-                                                                    aliquet.
-                                                                    In viverra dictum justo in vehicula. Fusce et massa
-                                                                    eu ante ornare molestie. Sed vestibulum sem felis,
-                                                                    ac elementum ligula blandit ac.</p>
-                                                                <div class="reply"><a href="javascript:void(0);"
-                                                                                      class="comment-reply-link">Reply</a>
-                                                                </div>
-                                                            </div>
-                                                            <ol class="children">
-                                                                <li class="comment odd parent">
-                                                                    <div class="comment-body">
-                                                                        <div class="comment-author vcard"><img
-                                                                                class="avatar photo"
-                                                                                src="/static/images/testimonials/pic3.jpg"
-                                                                                alt=""> <cite class="fn">Stacy
-                                                                            poe</cite> <span class="says">says:</span>
-                                                                        </div>
-                                                                        <div class="comment-meta"><a
-                                                                                href="javascript:void(0);">October 6,
-                                                                            2020 at 7:15 am</a></div>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipiscing elit. Nam vitae neque vitae
-                                                                            sapien malesuada aliquet.
-                                                                            In viverra dictum justo in vehicula. Fusce
-                                                                            et massa eu ante ornare molestie. Sed
-                                                                            vestibulum sem felis,
-                                                                            ac elementum ligula blandit ac.</p>
-                                                                        <div class="reply"><a href="javascript:void(0);"
-                                                                                              class="comment-reply-link">Reply</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ol>
-                                                            <!-- list END -->
-                                                        </li>
+
+                                                    <ol class="children" id="comment_{{comment.cid}}">
+
                                                     </ol>
-                                                    <!-- list END -->
-                                                </li>
-                                                <li class="comment">
-                                                    <div class="comment-body">
-                                                        <div class="comment-author vcard"><img class="avatar photo"
-                                                                                               src="/static/images/testimonials/pic1.jpg"
-                                                                                               alt=""> <cite class="fn">Stacy
-                                                            poe</cite> <span class="says">says:</span></div>
-                                                        <div class="comment-meta"><a href="javascript:void(0);">October
-                                                            6, 2020 at 7:15 am</a></div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                            vitae neque vitae sapien malesuada aliquet.
-                                                            In viverra dictum justo in vehicula. Fusce et massa eu ante
-                                                            ornare molestie. Sed vestibulum sem felis,
-                                                            ac elementum ligula blandit ac.</p>
-                                                        <div class="reply"><a href="javascript:void(0);"
-                                                                              class="comment-reply-link">Reply</a></div>
-                                                    </div>
+
                                                 </li>
                                             </ol>
+                                            {% endfor %}
                                             <!-- comment list END -->
                                             <!-- Form -->
                                             <div class="comment-respond" id="respond">
@@ -219,8 +156,9 @@
                                                                   id="comment"></textarea>
                                                     </p>
                                                     <p class="form-submit">
+{#                                                        on click 里用return 防止提交失败时也刷新页面#}
                                                         <input type="submit" value="Post Comment" class="submit"
-                                                               id="submit">
+                                                               id="submit" onclick="return submitComment()">
                                                     </p>
                                                 </form>
                                             </div>
@@ -320,4 +258,93 @@
     <!-- contact area END -->
     </div>
     <!-- Content END-->
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        function submitComment(){
+            var note_id = {{ note.note_id }};
+            var content = $('#comment').val();
+            $.ajax({
+                type:'post',
+                {# sb Django 这是什么形式的路由 #}
+                url:'../../notesave_comment/',
+                data:{'content':content,'note_id': note_id},
+                success:function (response){
+                    switch (response){
+                        case '0':
+                            alert('Please log in first');
+                            {#window.location.replace("{% url 'login' %}");#}
+                            break;
+                        case '1':
+                            alert('Comment successfully');
+                            break;
+                    }
+                },
+                error:function (){
+                    alert('Connection error');
+                }
+            })
+            {#return false 可以防止表格刷新#}
+            return true;
+        }
+
+        {# 填充每个reply #}
+        {# 后期考虑要不要点一个link，然后在释放这些reply，不然可能页面太长 #}
+        $('.children').each(function(){
+            reply_id = this.id
+            cid = reply_id.split("_")[1]
+            getReply(reply_id,cid)
+        })
+
+        function getReply(reply_id, id){
+            $.ajax({
+                type:'post',
+                {# sb Django 这是什么形式的路由 #}
+                url:'../../noteget_reply/',
+                data:{'cid' : id},
+                dataType:"json",
+                success:function (response){
+                    data = response.data
+                    length = response.length
+                    {# 这里这个function会被执行2次，第一次length是0 #}
+                    if(length != 0){
+                        fillReply(reply_id, data, length)
+                    }
+                },
+                error:function (){
+                    alert('Connection error');
+                }
+            })
+        }
+
+        function fillReply(id, data, length){
+            object = document.getElementById(id)
+            str = ''
+            for(var i = 0; i < length; i++) {
+                str += `
+                <li class="comment odd parent">
+                    <div class="comment-body">
+                        <div class="comment-author vcard"><img
+                                class="avatar photo"
+                                src="/static/images/testimonials/pic2.jpg"
+                                alt=""> <cite class="fn">${data[i].username}</cite> <span
+                                class="says">says:</span></div>
+                        <div class="comment-meta"><a href="javascript:void(0);">${data[i].time}</a></div>
+                        <p>${data[i].content}</p>
+                        <div class="reply"><a href="javascript:void(0);"
+                                              class="comment-reply-link">Reply</a>
+                        </div>
+                    </div>
+                </li>
+
+                `
+            }
+            object.innerHTML = str
+        }
+
+
+
+    </script>
 {% endblock %}
