@@ -5,6 +5,7 @@ import sys
 import tempfile
 import time
 
+from django.core.files.uploadedfile import UploadedFile
 from django.shortcuts import render, redirect
 # Create your views here.
 
@@ -12,7 +13,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
 
+from coderia.settings import MEDIA_ROOT
 from note.models import User, Note, Category
 
 TempFile = tempfile.mkdtemp(suffix='_test', prefix='python_')
@@ -170,7 +173,8 @@ def profile(request):
     if 'uid' not in request.session.keys():
         return redirect(reverse('login'))
     user = User.objects.get(uid=request.session['uid'])
-    return render(request, 'profile.html', {'user': user})
+    my_note = Note.objects.filter(uid=request.session['uid']).all()
+    return render(request, 'profile.html', {'user': user, 'my_note': my_note})
 
 
 def ModifyProfile(request):
@@ -197,4 +201,29 @@ def ModifyProfile(request):
             user.save()
             return HttpResponse(1)
     return HttpResponse(0)
+
+
+def ChangeAvatar(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    if request.method == 'POST':
+        file = request.FILES.get('file')
+        if file and allow_file(file.name):
+            local_path = MEDIA_ROOT + "\\" + file.name
+            with open(local_path, 'wb') as pic:
+                for c in file.chunks():
+                    pic.write(c)
+            user.avatar = file.name
+            user.save()
+            response = json.dumps(file.name)
+            return HttpResponse(response)
+    return HttpResponse(0)
+
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
+
+
+def allow_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
