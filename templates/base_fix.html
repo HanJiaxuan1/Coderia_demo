@@ -92,14 +92,14 @@
                                     <a href="#">Note Blog <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'note:show_notes' %}">Note</a></li>
-                                        <li><a href="#">Video Note</a></li>
+                                        <li><a href="{% url 'note:video_note' %}">Video Note</a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#">My Note <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'note:code_note' %}">Write Note</a></li>
-                                        <li><a href="#"> Upload Video Note</a></li>
+                                        <li><a href="{% url 'note:upload_video' %}"> Upload Video Note</a></li>
                                         <li><a href="#">All Note</a></li>
                                     </ul>
                                 </li>
@@ -129,52 +129,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="footer-title text-center"><span>Our Story</span></h4>
-                    </div>
-                    <div class="col-12">
-                        <div class="trending-stories owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-2">
-                            <div class="item">
-                                <div class="blog-card blog-grid no-gap">
-                                    <div class="blog-card-media">
-                                        <img src="/static/images/blog/grid/team1.jpg" alt=""/>
-                                    </div>
-                                    <div class="blog-card-info">
-                                        <h4 class="title"><a href="#">Brainstorming and Discuss</a>
-                                        </h4>
-                                        <div class="date">
-                                            03 <span></span> 2022
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="blog-card blog-grid no-gap">
-                                    <div class="blog-card-media">
-                                        <img src="/static/images/blog/grid/team2.jpg" alt=""/>
-                                    </div>
-                                    <div class="blog-card-info">
-                                        <h4 class="title"><a href="#">Working Together</a>
-                                        </h4>
-                                        <div class="date">
-                                            4 <span></span> 2022
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="blog-card blog-grid no-gap">
-                                    <div class="blog-card-media">
-                                        <img src="/static/images/blog/grid/team1.jpg" alt=""/>
-                                    </div>
-                                    <div class="blog-card-info">
-                                        <h4 class="title"><a href="#">Help each other</a></h4>
-                                        <div class="date">
-                                            5 <span></span> 2022
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-12">
                             <div class="footer-bottom">
                                 <div class="footer-copy">
