@@ -167,7 +167,6 @@ class Comment(models.Model):
     # 记录views的数量
     views = models.IntegerField(default=0, verbose_name='the number of views')
 
-
     def increase_views(self):
         self.views += 1
         self.save(update_fields=['views'])
@@ -192,5 +191,3 @@ class Reply(models.Model):
     def increase_views(self):
         self.views += 1
         self.save(update_fields=['views'])
-
-

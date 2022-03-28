@@ -169,6 +169,32 @@ def NoteDetail(request):
 def profile(request):
     if 'uid' not in request.session.keys():
         return redirect(reverse('login'))
-    print(request.session['uid'])
     user = User.objects.get(uid=request.session['uid'])
     return render(request, 'profile.html', {'user': user})
+
+
+def ModifyProfile(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        check_user = User.objects.filter(username=username).first()
+        if check_user is None or user.uid == check_user.uid:
+            firstname = request.POST.get('firstname')
+            lastname = request.POST.get('lastname')
+            region = request.POST.get('region')
+            phone = request.POST.get('phone')
+            birthday = request.POST.get('birthday')
+            email = request.POST.get('email')
+            user.username = username
+            user.first_name = firstname
+            user.last_name = lastname
+            user.email = email
+            user.birthday = birthday
+            user.region = region
+            user.telephone = phone
+            user.save()
+            return HttpResponse(1)
+    return HttpResponse(0)
+

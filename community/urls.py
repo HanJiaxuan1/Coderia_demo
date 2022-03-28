@@ -12,4 +12,5 @@ urlpatterns = [
     path('PostNote/', views.PostNote, name='PostNote'),
     path('NoteDetail/', views.NoteDetail, name='NoteDetail'),
     path('profile/', views.profile, name='profile'),
+    path('ModifyProfile/', views.ModifyProfile, name='ModifyProfile'),
 ]

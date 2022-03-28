@@ -511,6 +511,13 @@
 
 {% block script %}
     <script>
+        let username = document.getElementById('username');
+        let firstname = document.getElementById('firstname');
+        let lastname = document.getElementById('lastname');
+        let birthday = document.getElementById('birthday');
+        let phone = document.getElementById('phone');
+        let email = document.getElementById('email');
+        let region = document.getElementById('region');
         $(function () {
                 $("input").prop('disabled', true)
                     .keyup(resizeInput)
@@ -522,12 +529,34 @@
                 });
 
                 $('.save').click(function () {
+                    saveProfile()
                     $('html').removeClass('active');
                     $('input').prop('disabled', true);
                 });
 
                 function resizeInput() {
                     $(this).attr('size', $(this).val().length + 2);
+                }
+
+                function saveProfile(){
+                    $.ajax({
+                        type: 'post',
+                        url: '/ModifyProfile/',
+                        data: {'username': username.value, 'firstname': firstname.value, 'lastname': lastname.value,
+                        'phone': phone.value, 'email': email.value, 'region': region.value, 'birthday': birthday.value},
+                        {#data: {'username': username},#}
+                        success: function (response) {
+                            if (response === 0){
+                                alert('Username has been used!')
+                            }
+                            else if (response === 1) {
+                                alert('saved successfully');
+                            }
+                        },
+                        error: function () {
+                            alert('connection error');
+                        }
+                    });
                 }
             }
         );

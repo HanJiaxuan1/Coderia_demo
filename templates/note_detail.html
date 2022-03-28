@@ -309,7 +309,7 @@
                     data = response.data
                     length = response.length
                     {# 这里这个function会被执行2次，第一次length是0 #}
-                    if(length != 0){
+                    if(length !== 0){
                         fillReply(reply_id, data, length)
                     }
                 },

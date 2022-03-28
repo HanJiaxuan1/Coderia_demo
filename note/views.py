@@ -21,6 +21,7 @@ from werkzeug import Response
 
 from note.models import *
 
+
 def video_note(request):
     return render(request, 'codeEditor.html')
 
@@ -41,8 +42,8 @@ def note_detail(request, note_id):
     request.session['uid'] = 1
     find_note = Note.objects.get(note_id=note_id)
     # 多个放回值时不能用get
-    comments = Comment.objects.filter(note_id = note_id).all()
-    return render(request, 'note_detail.html', {'note': find_note, 'comment_list': comments })
+    comments = Comment.objects.filter(note_id=note_id).all()
+    return render(request, 'note_detail.html', {'note': find_note, 'comment_list': comments})
 
 
 def save_comment(request):
@@ -52,18 +53,18 @@ def save_comment(request):
     content = request.POST.get("content")
     note_id = request.POST.get("note_id")
     note = Note.objects.get(note_id=note_id)
-    comment = Comment(uid=user, content=content, note_id = note)
+    comment = Comment(uid=user, content=content, note_id=note)
     comment.save()
     return HttpResponse("1")
 
 
 def get_reply(request):
     cid = request.POST.get("cid")
-    replys = Reply.objects.filter(cid = cid).all()
+    replys = Reply.objects.filter(cid=cid).all()
     list = []
     for item in replys:
         reply = {
-            'username' : item.uid.username,
+            'username': item.uid.username,
             'time': item.create_time,
             'content': item.content,
         }
@@ -72,7 +73,6 @@ def get_reply(request):
     # 这里的问题是直接用HttpResponse传，QuerySet的长度会被异常识别。
     # replys是QuerySet类型的变量而不是dic
     return JsonResponse(dict)
-
 
 
 def upload_video(request):
@@ -108,6 +108,7 @@ def upload_video(request):
 
     return render(request, 'upload.html')
 
+
 def VideoProcess(language, mode, filename, uid):
     pre_file = filename
     input_path = Config.input_path
@@ -140,7 +141,7 @@ def VideoProcess(language, mode, filename, uid):
         video = Video(uid=uid, name=pre_file, text=text, language='Chinese')
     video.save()
     # 删除wav文件
-    os.remove(os.path.join(Config.video_display_dir,filename))
+    os.remove(os.path.join(Config.video_display_dir, filename))
     return filename, text
 
 
@@ -151,7 +152,7 @@ def JudgePath(path):
 
 
 def code_editor(request):
-    video = Video.objects.filter(vid = request.session.get('uid')).first()
+    video = Video.objects.filter(vid=request.session.get('uid')).first()
     text = video.text
     filename = video.name
     filename = os.path.join(Config.video_display_dir, filename)
