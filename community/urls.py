@@ -18,4 +18,6 @@ urlpatterns = [
     path('DeleteNote/', views.DeleteNote, name='DeleteNote'),
     path('CollectNote/', views.CollectNote, name='CollectNote'),
     path('CancelCollectNote/', views.CancelCollectNote, name='CancelCollectNote'),
+    path('LikeNote/', views.LikeNote, name='LikeNote'),
+    path('CancelLikeNote/', views.CancelLikeNote, name='CancelLikeNote'),
 ]

@@ -58,24 +58,21 @@ class User(models.Model):
         if self.is_collect(note):
             user_note = UserCollectNote.objects.filter(user_id=self.uid, note_id=note.note_id).first()
             user_note.delete()
-    #
-    # def like(self, note):
-    #     if not self.is_liking(note):
-    #         ll = Like(liker=self, liked_note=note)
-    #         db.session.add(ll)
-    #         db.session.commit()
-    #
-    # def is_liking(self, note):
-    #     if note.id is None:
-    #         return False
-    #     return self.liked_note.filter_by(
-    #         liked_note_id=note.note_id).first() is not None
-    #
-    # def cancel_like(self, note):
-    #     ll = self.liked_note.filter_by(liked_note_id=note.note_id).first()
-    #     if ll:
-    #         db.session.delete(ll)
-    #         db.session.commit()
+
+    def like(self, note):
+        if not self.is_liking(note):
+            user_note = UserLikeNote(user=self, note=note)
+            user_note.save()
+
+    def is_liking(self, note):
+        if note.note_id is None:
+            return False
+        return UserLikeNote.objects.filter(user_id=self.uid, note_id=note.note_id).first() is not None
+
+    def cancel_like(self, note):
+        if self.is_liking(note):
+            user_note = UserLikeNote.objects.filter(user_id=self.uid, note_id=note.note_id).first()
+            user_note.delete()
 
 
 class Profile(models.Model):

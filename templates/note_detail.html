@@ -45,14 +45,20 @@
                                         <div class="share-post ml-auto">
                                             <ul class="slide-social">
                                                 <li style="color: #0b0b0b">
-                                                    <i class="fa fa-thumbs-o-up" style="font-size: 20px"></i>
-                                                    <i class="fa fa-thumbs-up" style="font-size: 20px"></i>
-                                                    <span>  123 Likes</span>
+                                                    {% if is_liking %}
+                                                        <i class="fa fa-thumbs-up" style="font-size: 20px"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-thumbs-o-up" style="font-size: 20px"></i>
+                                                    {% endif %}
+                                                    <span>  {{ liking_num }} Likes</span>
                                                 </li>
                                                 <li style="color: #0b0b0b">
-                                                    <i class="fa fa-star-o" style="font-size: 20px"></i>
-                                                    <i class="fa fa-star" style="font-size: 20px"></i>
-                                                    <span>  987 Collect</span>
+                                                    {% if is_collecting %}
+                                                        <i class="fa fa-star" style="font-size: 20px"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-star-o" style="font-size: 20px"></i>
+                                                    {% endif %}
+                                                    <span>  {{ collecting_num }} Collect</span>
                                                 </li>
                                             </ul>
                                         </div>
