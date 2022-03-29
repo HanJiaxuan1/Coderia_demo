@@ -325,7 +325,7 @@ var Kelsey = function(){
 				var menu = jQuery('.sticky-header');
 				if ($(window).scrollTop() > menu.offset().top) {
 					menu.addClass('is-fixed');
-					$('.header-style-5 .container > .logo-header .logo').attr('src','images/logo.png');
+					$('.header-style-5 .container > .logo-header .logo').attr('src','images/logo-white.png');
 				} else {
 					menu.removeClass('is-fixed');
 					$('.header-style-5 .container > .logo-header .logo').attr('src','images/logo-white-2.png')

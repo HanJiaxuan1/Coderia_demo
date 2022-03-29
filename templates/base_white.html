@@ -46,18 +46,18 @@
 <body id="bg">
 <div class="page-wraper">
     <div id="loading-area"></div>
-    <!-- header -->
-    <header class="site-header mo-left header-full header header-transparent">
-        <!-- main header -->
+	<!-- header -->
+    <header class="site-header mo-left header-full header">
+		<!-- main header -->
         <div class="sticky-header main-bar-wraper navbar-expand-lg">
             <div class="main-bar clearfix ">
                 <div class="container-fluid">
-                    <div class="header-content-bx">
-                        <!-- website logo -->
-                        <div class="logo-header">
-                            <a href="{% url 'index' %}"><img src="/static/images/logo-white.png" alt=""/></a>
-                        </div>
-                        <!-- nav toggle button -->
+					<div class="header-content-bx">
+						<!-- website logo -->
+						<div class="logo-header">
+							<a href="{% url 'index' %}"><img src="/static/images/logo_black_small.png" alt=""/></a>
+						</div>
+						<!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end kk" type="button"
                                 data-toggle="collapse" data-target="#navbarNavDropdown"
                                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@
                             <span></span>
                             <span></span>
                         </button>
-                        <!-- extra nav -->
+						<!-- extra nav -->
                         <div class="extra-nav">
                             <div class="extra-cell">
                                 <ul>
@@ -76,7 +76,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- Quik search -->
+						<!-- Quik search -->
                         <div class="dlab-quik-search">
                             <form action="{% url 'haystack_search' %}" method="get">
                                 <input name="q" value="" type="text" class="form-control"
@@ -84,7 +84,7 @@
                                 <span id="quik-search-remove"><i class="ti-close"></i></span>
                             </form>
                         </div>
-                        <!-- main nav -->
+						<!-- main nav -->
                         <div class="header-nav navbar-collapse collapse justify-content-center nav-dark"
                              id="navbarNavDropdown">
                             <ul class="nav navbar-nav">
@@ -100,7 +100,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'note:code_note' %}">Write Note</a></li>
                                         <li><a href="{% url 'note:upload_video' %}"> Upload Video Note</a></li>
-                                        <li><a href="{% url 'test' %}">All Note</a></li>
+                                        <li><a href="#">All Note</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -111,8 +111,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
+					</div>
+				</div>
             </div>
         </div>
         <!-- main header END -->

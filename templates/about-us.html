@@ -60,72 +60,61 @@
             <!-- contact area END -->
         </div>
         <!-- Content END-->
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h4 class="footer-title text-center"><span>Our Story</span></h4>
-                        </div>
-                        <div class="col-12">
-                            <div class="trending-stories owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-2">
-                                <div class="item">
-                                    <div class="blog-card blog-grid no-gap">
-                                        <div class="blog-card-media">
-                                            <img src="/static/images/blog/grid/team1.jpg" alt=""/>
-                                        </div>
-                                        <div class="blog-card-info">
-                                            <h4 class="title"><a href="#">Brainstorming and Discuss</a>
-                                            </h4>
-                                            <div class="date">
-                                                03 <span></span> 2022
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="blog-card blog-grid no-gap">
-                                        <div class="blog-card-media">
-                                            <img src="/static/images/blog/grid/team2.jpg" alt=""/>
-                                        </div>
-                                        <div class="blog-card-info">
-                                            <h4 class="title"><a href="#">Working Together</a>
-                                            </h4>
-                                            <div class="date">
-                                                4 <span></span> 2022
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="blog-card blog-grid no-gap">
-                                        <div class="blog-card-media">
-                                            <img src="/static/images/blog/grid/team1.jpg" alt=""/>
-                                        </div>
-                                        <div class="blog-card-info">
-                                            <h4 class="title"><a href="#">Help each other</a></h4>
-                                            <div class="date">
-                                                5 <span></span> 2022
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="footer-bottom">
-                                    <div class="footer-copy">
-                                        <span>©2022. Coderia.</span>
-                                    </div>
-                                    <div class="footer-logo">
-                                        <a href="index.html"><img src="/static/images/logo_black.png" alt=""/></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+{% endblock %}
+
+<!-- Footer -->
+{% block footername %}
+    <div class="col-12">
+        <h4 class="footer-title text-center"><span>Coderia Story</span></h4>
+    </div>
+{% endblock %}
+{% block footer %}
+    {#    <div class="col-12">#}
+    {#        <h4 class="footer-title text-center"><span>Coderia Story</span></h4>#}
+    {#    </div>#}
+    <div class="trending-stories owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-2">
+        <div class="item">
+            <div class="blog-card blog-grid no-gap">
+                <div class="blog-card-media">
+                    <img src="/static/images/blog/grid/team1.jpg" alt=""/>
+                </div>
+                <div class="blog-card-info">
+                    <h4 class="title"><a href="#">Brainstorming and Discuss</a>
+                    </h4>
+                    <div class="date">
+                        3 <span></span> 2022
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+        <div class="item">
+            <div class="blog-card blog-grid no-gap">
+                <div class="blog-card-media">
+                    <img src="/static/images/blog/grid/team2.jpg" alt=""/>
+                </div>
+                <div class="blog-card-info">
+                    <h4 class="title"><a href="#">Working Together</a>
+                    </h4>
+                    <div class="date">
+                        4 <span></span> 2022
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="blog-card blog-grid no-gap">
+                <div class="blog-card-media">
+                    <img src="/static/images/blog/grid/team1.jpg" alt=""/>
+                </div>
+                <div class="blog-card-info">
+                    <h4 class="title"><a href="#">Help each other</a></h4>
+                    <div class="date">
+                        5 <span></span> 2022
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
+

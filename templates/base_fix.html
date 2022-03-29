@@ -46,15 +46,15 @@
 <div class="page-wraper">
     <div id="loading-area"></div>
     <!-- header -->
-    <header class="site-header mo-left header-full header" style="background-color: black">
+    <header class="site-header mo-left header-full header">
         <!-- main header -->
-        <div class="sticky-header main-bar-wraper navbar-expand-lg">
-            <div class="main-bar clearfix ">
-                <div class="container-fluid">
+        <div class="sticky-header main-bar-wraper navbar-expand-lg" >
+            <div class="main-bar clearfix " style="background: #0b0b0b">
+                <div class="container-fluid" >
                     <div class="header-content-bx">
                         <!-- website logo -->
                         <div class="logo-header">
-                            <a href="{% url 'index' %}"><img src="/static/images/logo.png" alt=""/></a>
+                            <a href="{% url 'index' %}"><img src="/static/images/logo-white.png" alt=""/></a>
                         </div>
                         <!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end kk" type="button"
@@ -89,25 +89,25 @@
                              id="navbarNavDropdown">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a href="#">Note Blog <i class="fa fa-chevron-down"></i></a>
+                                    <a href="#"  style="color: white">Note Blog <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'note:show_notes' %}">Note</a></li>
                                         <li><a href="{% url 'note:video_note' %}">Video Note</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">My Note <i class="fa fa-chevron-down"></i></a>
+                                    <a href="#"  style="color: white">My Note <i class="fa fa-chevron-down"></i></a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'note:code_note' %}">Write Note</a></li>
-                                        <li><a href="{% url 'note:upload_video' %}"> Upload Video Note</a></li>
-                                        <li><a href="#">All Note</a></li>
+                                        <li><a style="color: white" href="{% url 'note:code_note' %}">Write Note</a></li>
+                                        <li><a style="color: white" href="{% url 'note:upload_video' %}"> Upload Video Note</a></li>
+                                        <li><a style="color: white" href="#">All Note</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="{% url 'about_us' %}">About Us</a>
+                                    <a style="color: white" href="{% url 'about_us' %}">About Us</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'profile' %}">Profile</a>
+                                    <a style="color: white" href="{% url 'profile' %}">Profile</a>
                                 </li>
                             </ul>
                         </div>
@@ -118,11 +118,11 @@
         <!-- main header END -->
     </header>
     <!-- header END -->
+    <div>
+        {% block body %}
 
-    {% block body %}
-
-    {% endblock %}
-
+        {% endblock %}
+    </div>
     <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-top">
