@@ -3,7 +3,6 @@
 {% block title %} Coderia - Note Page {% endblock %}
 
 {% block body %}
-
     <!-- Dispaly All Note -->
     <div class="page-content bg-white">
         <!-- Slider Banner -->
@@ -63,40 +62,49 @@
                             <div class="row loadmore-content">
                                 <div class="col-lg-12">
                                     {% for note in note_list %}
-                                        <div name="note_detail" class="blog-card blog-md"
-                                             onclick="window.location.href='{% url 'note:note_detail' note.note_id %}'">
+                                        <div name="note_detail" class="blog-card blog-md">
                                             <div class="blog-card-media">
                                                 <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
                                             </div>
                                             <div class="blog-card-info">
                                                 <h4 class="title">
-                                                    <a>{{ note.title }}</a>
+                                                    <a>{{ note.note.title }}</a>
                                                 </h4>
                                                 <p>
-                                                    {{ note.create_time|timesince }} ago
+                                                    {{ note.note.create_time|timesince }} ago
                                                     <a style="font-weight: bold">written
-                                                        by {{ note.uid.username }}</a>
+                                                        by {{ note.note.uid.username }}</a>
                                                 </p>
-                                                {% if note.content_html %}
-                                                    {{ note.content_html | striptags | truncatechars:200 }}
+                                                {% if note.note.content_html %}
+                                                    {{ note.note.content_html | striptags | truncatechars:200 }}
                                                 {% else %}
-                                                    {{ note.content | truncatechars:150 }}
+                                                    {{ note.note.content | truncatechars:150 }}
                                                 {% endif %}
-                                                <div>
-                                                    <label for="like" style="font-family:Georgia; margin-top: 15px">
-                                                        <i class="fas fa-thumbs-up"></i> 123
-                                                    </label>
-                                                </div>
-                                                <a class="btn-link readmore">
+                                                <a class="btn-link readmore" href="{% url 'note:note_detail' note.note.note_id %}">
                                                     <i class="la la-arrow-right"></i>
                                                 </a>
+                                                <br/>
+                                                {% if user is not None %}
 
+                                                    <button class="collect" name="{{ note.note.note_id }}"
+                                                            type="button">
+                                                        {% if note.state %}
+                                                            cancel collect
+                                                        {% else %}
+                                                            collect it
+                                                        {% endif %}
+                                                    </button>
+
+                                                    <button class="like" name="{{ note.note.note_id }}" type="button">
+                                                        like
+                                                    </button>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% endfor %}
+
                                 </div>
                             </div>
-                            <!-- load more -->
                             <div class="row">
                                 <div class="col-lg-12 m-t10">
                                     <div class="text-center m-b30">
@@ -106,9 +114,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- load more end-->
                         </div>
-                        <!-- 侧边栏 -->
                         <div class="col-lg-4 col-md-5 col-sm-12 col-12">
                             <div class="side-bar p-l30 sticky-top">
                                 <div class="widget recent-posts-entry">
@@ -154,7 +160,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 侧边栏 end -->
                     </div>
                 </div>
             </div>
@@ -163,5 +168,66 @@
         <!-- contact area END -->
     </div>
     <!-- Content END-->
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        $('.collect').click(function () {
+            let note_id = this.name;
+            let state = this.innerHTML;
+            if(state === "cancel collect"){
+                this.innerHTML = "collect it";
+                cancel_collect(note_id);
+            }
+            else{
+                this.innerHTML = "cancel collect";
+                collect(note_id);
+            }
+
+        });
+
+        function collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to collect the note');
+                    } else {
+                        alert('successfully collect');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+        function cancel_collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelCollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel collect the note');
+                    } else {
+                        alert('successfully cancel');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+
+    </script>
 {% endblock %}
 

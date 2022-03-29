@@ -242,3 +242,27 @@ def DeleteNote(request):
     return HttpResponse(0)
 
 
+def CancelCollectNote(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    note_id = request.POST.get('note_id')
+    note_collect = Note.objects.filter(note_id=note_id).first()
+    if note_collect is not None:
+        user.cancel_collect(note_collect)
+        return HttpResponse(1)
+    return HttpResponse(0)
+
+
+def CollectNote(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    note_id = request.POST.get('note_id')
+    note_collect = Note.objects.filter(note_id=note_id).first()
+    if note_collect is not None:
+        user.collect(note_collect)
+        return HttpResponse(1)
+    return HttpResponse(0)
+
+

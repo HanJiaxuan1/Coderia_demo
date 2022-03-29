@@ -33,8 +33,15 @@ def code_note(request):
 
 
 def show_notes(request):
-    note_list = Note.objects.all()
-    return render(request, 'note_blog.html', {'note_list': note_list})
+    if 'uid' in request.session.keys():
+        user = User.objects.get(uid=request.session.get('uid'))
+        note_list_set = Note.objects.all()
+        note_list = [{'note': note, 'state': user.is_collect(note)}
+                     for note in note_list_set]
+        return render(request, 'note_blog.html', {'note_list': note_list, 'user': user})
+    else:
+        note_list = Note.objects.all()
+        return render(request, 'note_blog.html', {'note_list': note_list})
 
 
 def note_detail(request, note_id):
