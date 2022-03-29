@@ -3,6 +3,7 @@
 {% block title %} Coderia - Note Page {% endblock %}
 
 {% block body %}
+
     <!-- Dispaly All Note -->
     <div class="page-content bg-white">
         <!-- Slider Banner -->
@@ -81,15 +82,21 @@
                                                 {% else %}
                                                     {{ note.content | truncatechars:150 }}
                                                 {% endif %}
+                                                <div>
+                                                    <label for="like" style="font-family:Georgia; margin-top: 15px">
+                                                        <i class="fas fa-thumbs-up"></i> 123
+                                                    </label>
+                                                </div>
                                                 <a class="btn-link readmore">
                                                     <i class="la la-arrow-right"></i>
                                                 </a>
+
                                             </div>
                                         </div>
                                     {% endfor %}
-
                                 </div>
                             </div>
+                            <!-- load more -->
                             <div class="row">
                                 <div class="col-lg-12 m-t10">
                                     <div class="text-center m-b30">
@@ -99,7 +106,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- load more end-->
                         </div>
+                        <!-- 侧边栏 -->
                         <div class="col-lg-4 col-md-5 col-sm-12 col-12">
                             <div class="side-bar p-l30 sticky-top">
                                 <div class="widget recent-posts-entry">
@@ -145,6 +154,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 侧边栏 end -->
                     </div>
                 </div>
             </div>
