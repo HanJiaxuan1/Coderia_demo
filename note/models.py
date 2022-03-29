@@ -212,3 +212,9 @@ class UserCollectNote(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
     note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='note')
+
+
+class UserLikeNote(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='note')

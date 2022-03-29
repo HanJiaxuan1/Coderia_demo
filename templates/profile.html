@@ -367,10 +367,6 @@
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-favorite" role="tab"
                        aria-controls="pills-contact" aria-selected="false">Favorite Notes</a>
                 </li>
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"#}
-                {#                       aria-controls="pills-contact" aria-selected="false">Liked Notes</a>#}
-                {#                </li>#}
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade active show" id="pills-note" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -464,6 +460,43 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="pills-favorite" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="p-3 border mb-3">
+                        {% if not collect_note %}
+                            <div style="text-align: center; height: 200px; font-size: 30px; margin-top: 85px">
+                                You have not collect any notes!
+                            </div>
+                        {% endif %}
+                        {% for note in collect_note %}
+                            <div name="note_detail" class="blog-card blog-md">
+                                <div class="blog-card-media">
+                                    <img src="/static/images/blog/grid/pic5.jpg" alt=""/>
+                                </div>
+                                <div class="blog-card-info">
+                                    <h4 class="title">
+                                        <a>{{ note.note.title }}</a>
+                                    </h4>
+                                    <p>
+                                        {{ note.note.create_time|timesince }} ago
+                                        <a style="font-weight: bold">written
+                                            by {{ note.note.uid.username }}</a>
+                                    </p>
+                                    {% if note.note.content_html %}
+                                        {{ note.note.content_html | striptags | truncatechars:200 }}
+                                    {% else %}
+                                        {{ note.note.content | truncatechars:150 }}
+                                    {% endif %}
+                                    <a class="btn-link readmore" href='{% url 'note:note_detail' note.note.note_id %}'>
+                                        <i class="la la-arrow-right"></i>
+                                    </a>
+                                    <br/>
+{#                                    <button class="remove" name="{{ note.note.note_id }}" type="button">remove</button>#}
+{#                                    <button class="edit" type="button">edit</button>#}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END profile-header-tab -->
@@ -491,7 +524,7 @@
                 contentType: false,
                 data: formData,
                 success: function (response) {
-                    if (response == 0) {
+                    if (response === 0) {
                         alert('please upload avatar in the correct format')
                     } else {
                         init(response);
@@ -598,6 +631,8 @@
                 }
             });
         }
+
+
 
     </script>
 

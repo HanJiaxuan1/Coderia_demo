@@ -16,7 +16,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 
 from coderia.settings import MEDIA_ROOT
-from note.models import User, Note, Category
+from note.models import User, Note, Category, UserCollectNote
 
 TempFile = tempfile.mkdtemp(suffix='_test', prefix='python_')
 # 文件名
@@ -175,7 +175,8 @@ def profile(request):
         return redirect(reverse('login'))
     user = User.objects.get(uid=request.session['uid'])
     my_note = Note.objects.filter(uid=request.session['uid']).all()
-    return render(request, 'profile.html', {'user': user, 'my_note': my_note})
+    collect_note = UserCollectNote.objects.filter(user_id=request.session['uid']).all()
+    return render(request, 'profile.html', {'user': user, 'my_note': my_note, 'collect_note':collect_note})
 
 
 def ModifyProfile(request):
