@@ -80,7 +80,8 @@
                                                 {% else %}
                                                     {{ note.note.content | truncatechars:150 }}
                                                 {% endif %}
-                                                <a class="btn-link readmore" href="{% url 'note:note_detail' note.note.note_id %}">
+                                                <a class="btn-link readmore"
+                                                   href="{% url 'note:note_detail' note.note.note_id %}">
                                                     <i class="la la-arrow-right"></i>
                                                 </a>
                                                 <br/>
@@ -88,7 +89,7 @@
 
                                                     <button class="collect" name="{{ note.note.note_id }}"
                                                             type="button">
-                                                        {% if note.state %}
+                                                        {% if note.collect_state %}
                                                             cancel collect
                                                         {% else %}
                                                             collect it
@@ -96,7 +97,11 @@
                                                     </button>
 
                                                     <button class="like" name="{{ note.note.note_id }}" type="button">
-                                                        like
+                                                        {% if note.like_state %}
+                                                            cancel like
+                                                        {% else %}
+                                                            like
+                                                        {% endif %}
                                                     </button>
                                                 {% endif %}
                                             </div>
@@ -176,11 +181,10 @@
         $('.collect').click(function () {
             let note_id = this.name;
             let state = this.innerHTML;
-            if(state === "cancel collect"){
+            if (state === "cancel collect") {
                 this.innerHTML = "collect it";
                 cancel_collect(note_id);
-            }
-            else{
+            } else {
                 this.innerHTML = "cancel collect";
                 collect(note_id);
             }
@@ -227,6 +231,58 @@
             });
         }
 
+        $('.like').click(function () {
+            let note_id = this.name;
+            let state = this.innerHTML;
+            if (state === "cancel like") {
+                this.innerHTML = "like";
+                cancel_like(note_id);
+            } else {
+                this.innerHTML = "cancel like";
+                like(note_id);
+            }
+
+        });
+
+        function like(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/LikeNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to like the note');
+                    } else {
+                        alert('successfully like');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+        function cancel_like(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelLikeNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel like the note');
+                    } else {
+                        alert('successfully cancel');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
 
     </script>
 {% endblock %}

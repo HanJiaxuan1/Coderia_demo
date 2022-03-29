@@ -267,3 +267,26 @@ def CollectNote(request):
     return HttpResponse(0)
 
 
+def CancelLikeNote(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    note_id = request.POST.get('note_id')
+    note_like = Note.objects.filter(note_id=note_id).first()
+    if note_like is not None:
+        user.cancel_like(note_like)
+        return HttpResponse(1)
+    return HttpResponse(0)
+
+
+def LikeNote(request):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    note_id = request.POST.get('note_id')
+    note_like = Note.objects.filter(note_id=note_id).first()
+    if note_like is not None:
+        user.like(note_like)
+        return HttpResponse(1)
+    return HttpResponse(0)
+
