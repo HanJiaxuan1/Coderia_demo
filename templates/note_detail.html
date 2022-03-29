@@ -15,7 +15,7 @@
                                 <div class="dlab-post-info">
                                     <div class="dlab-post-meta">
                                         <div class="date">
-{#                                            {{ note.create_time|timeuntil }}#}
+                                            {#                                            {{ note.create_time|timeuntil }}#}
                                         </div>
                                     </div>
                                     <div class="dlab-post-title">
@@ -44,7 +44,8 @@
                                         </div>
                                         <div class="share-post ml-auto">
                                             <ul class="slide-social">
-                                                <li style="color: #0b0b0b">
+                                                <li class="like" name="{{ note.note_id }}" state="{{ is_liking }}"
+                                                    style="color: #0b0b0b">
                                                     {% if is_liking %}
                                                         <i class="fa fa-thumbs-up" style="font-size: 20px"></i>
                                                     {% else %}
@@ -52,7 +53,8 @@
                                                     {% endif %}
                                                     <span>  {{ liking_num }} Likes</span>
                                                 </li>
-                                                <li style="color: #0b0b0b">
+                                                <li class="collect" name="{{ note.note_id }}" state="{{ is_collecting }}"
+                                                    style="color: #0b0b0b">
                                                     {% if is_collecting %}
                                                         <i class="fa fa-star" style="font-size: 20px"></i>
                                                     {% else %}
@@ -121,25 +123,29 @@
                                         <div>
                                             <!-- comment list END -->
                                             {% for comment in comment_list %}
-                                            <ol class="comment-list">
-                                                <li class="comment">
-                                                    <div class="comment-body">
-                                                        <div class="comment-author vcard"><img class="avatar photo"
-                                                                                               src="/static/images/testimonials/pic1.jpg"
-                                                                                               alt=""> <cite class="fn">{{  comment.uid.username  }}
-                                                        </cite> <span class="says">says:</span></div>
-                                                        <div class="comment-meta"><a href="javascript:void(0);">{{  comment.create_time|timesince  }} Ago</a></div>
-                                                        <p>{{  comment.content  }}</p>
-                                                        <div class="reply"><a href="javascript:void(0);"
-                                                                              class="comment-reply-link">Reply</a></div>
-                                                    </div>
+                                                <ol class="comment-list">
+                                                    <li class="comment">
+                                                        <div class="comment-body">
+                                                            <div class="comment-author vcard"><img class="avatar photo"
+                                                                                                   src="/static/images/testimonials/pic1.jpg"
+                                                                                                   alt=""> <cite
+                                                                    class="fn">{{ comment.uid.username }}
+                                                            </cite> <span class="says">says:</span></div>
+                                                            <div class="comment-meta"><a
+                                                                    href="javascript:void(0);">{{ comment.create_time|timesince }}
+                                                                Ago</a></div>
+                                                            <p>{{ comment.content }}</p>
+                                                            <div class="reply"><a href="javascript:void(0);"
+                                                                                  class="comment-reply-link">Reply</a>
+                                                            </div>
+                                                        </div>
 
-                                                    <ol class="children" id="comment_{{comment.cid}}">
+                                                        <ol class="children" id="comment_{{ comment.cid }}">
 
-                                                    </ol>
+                                                        </ol>
 
-                                                </li>
-                                            </ol>
+                                                    </li>
+                                                </ol>
                                             {% endfor %}
                                             <!-- comment list END -->
                                             <!-- Form -->
@@ -154,7 +160,7 @@
                                                                   id="comment"></textarea>
                                                     </p>
                                                     <p class="form-submit">
-{#                                                        on click 里用return 防止提交失败时也刷新页面#}
+                                                        {#                                                        on click 里用return 防止提交失败时也刷新页面#}
                                                         <input type="submit" value="Post Comment" class="submit"
                                                                id="submit" onclick="return submitComment()">
                                                     </p>
@@ -232,31 +238,32 @@
     <!-- contact area END -->
     </div>
     <!-- Content END-->
+
 {% endblock %}
 
 
 {% block script %}
     <script>
-        function submitComment(){
+        function submitComment() {
             var note_id = {{ note.note_id }};
             var content = $('#comment').val();
             $.ajax({
-                type:'post',
+                type: 'post',
                 {# sb Django 这是什么形式的路由 #}
-                url:'../../notesave_comment/',
-                data:{'content':content,'note_id': note_id},
-                success:function (response){
-                    switch (response){
+                url: '../../notesave_comment/',
+                data: {'content': content, 'note_id': note_id},
+                success: function (response) {
+                    switch (response) {
                         case '0':
                             alert('Please log in first');
-                            {#window.location.replace("{% url 'login' %}");#}
+                        {#window.location.replace("{% url 'login' %}");#}
                             break;
                         case '1':
                             alert('Comment successfully');
                             break;
                     }
                 },
-                error:function (){
+                error: function () {
                     alert('Connection error');
                 }
             })
@@ -266,37 +273,37 @@
 
         {# 填充每个reply #}
         {# 后期考虑要不要点一个link，然后在释放这些reply，不然可能页面太长 #}
-        $('.children').each(function(){
+        $('.children').each(function () {
             reply_id = this.id
             cid = reply_id.split("_")[1]
-            getReply(reply_id,cid)
+            getReply(reply_id, cid)
         })
 
-        function getReply(reply_id, id){
+        function getReply(reply_id, id) {
             $.ajax({
-                type:'post',
+                type: 'post',
                 {# sb Django 这是什么形式的路由 #}
-                url:'../../noteget_reply/',
-                data:{'cid' : id},
-                dataType:"json",
-                success:function (response){
+                url: '../../noteget_reply/',
+                data: {'cid': id},
+                dataType: "json",
+                success: function (response) {
                     data = response.data
                     length = response.length
                     {# 这里这个function会被执行2次，第一次length是0 #}
-                    if(length !== 0){
+                    if (length !== 0) {
                         fillReply(reply_id, data, length)
                     }
                 },
-                error:function (){
+                error: function () {
                     alert('Connection error');
                 }
             })
         }
 
-        function fillReply(id, data, length){
+        function fillReply(id, data, length) {
             object = document.getElementById(id)
             str = ''
-            for(var i = 0; i < length; i++) {
+            for (var i = 0; i < length; i++) {
                 str += `
                 <li class="comment odd parent">
                     <div class="comment-body">
@@ -318,7 +325,122 @@
             object.innerHTML = str
         }
 
+        $('.like').click(function () {
+            let element = document.getElementsByClassName("like")[0]
+            let note_id = element.getAttribute("name");
+            let state = element.getAttribute("state");
 
+            if (state === "True") {
+                element.children[0].setAttribute("class", "fa fa-thumbs-o-up");
+                let collecting_num = parseInt({{ collecting_num }}) - 1
+                element.children[1].innerHTML =  collecting_num + " LIKES"
+                element.setAttribute("state", "False")
+                cancel_like(note_id);
+            } else {
+                element.children[0].setAttribute("class", "fa fa-thumbs-up");
+                let collecting_num = parseInt({{ collecting_num }}) + 1
+                element.children[1].innerHTML =  collecting_num + " LIKES"
+                element.setAttribute("state", "True")
+                like(note_id);
+            }
 
+        });
+
+        function like(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/LikeNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to like the note');
+                    } else {
+                        alert('successfully like');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+        function cancel_like(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelLikeNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel like the note');
+                    } else {
+                        alert('successfully cancel');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+        $('.collect').click(function () {
+            let element = document.getElementsByClassName("collect")[0]
+            let note_id = element.getAttribute("name");
+            let state = element.getAttribute("state");
+
+            if (state === "True") {
+                element.children[0].setAttribute("class", "fa fa-star-o");
+                element.setAttribute("state", "False")
+                cancel_collect(note_id);
+            } else {
+                element.children[0].setAttribute("class", "fa fa-star");
+                element.setAttribute("state", "True")
+                collect(note_id);
+            }
+
+        });
+
+        function collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to collect the note');
+                    } else {
+                        alert('successfully collect');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
+
+        function cancel_collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelCollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel collect the note');
+                    } else {
+                        alert('successfully collect');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
     </script>
 {% endblock %}
