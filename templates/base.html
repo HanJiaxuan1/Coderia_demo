@@ -38,7 +38,7 @@
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/layers.css">
     <!-- REVOLUTION NAVIGATION STYLES -->
     <link rel="stylesheet" type="text/css" href="/static/plugins/revolution/revolution/css/navigation.css">
-{#    {{ moment.include_moment() }}#}
+    {#    {{ moment.include_moment() }}#}
     {% block style %}
     {% endblock %}
 
@@ -71,7 +71,8 @@
                                 <ul>
                                     <li class="search-btn"><a id="quik-search-btn" href="javascript:"
                                                               class="btn radius-xl gray">Search</a></li>
-                                    <li class="search-btn"><a id="log-btn" href="{% url 'login' %}" class="btn radius-xl gray">Log in</a></li>
+                                    <li class="search-btn"><a id="log-btn" href="{% url 'login' %}"
+                                                              class="btn radius-xl gray">Log in</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -127,7 +128,13 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
+                    {% block footername %}
+
+                    {% endblock %}
                     <div class="col-12">
+                        {% block footer %}
+
+                        {% endblock %}
                         <div class="col-12">
                             <div class="footer-bottom">
                                 <div class="footer-copy">
