@@ -490,8 +490,8 @@
                                         <i class="la la-arrow-right"></i>
                                     </a>
                                     <br/>
-{#                                    <button class="remove" name="{{ note.note.note_id }}" type="button">remove</button>#}
-{#                                    <button class="edit" type="button">edit</button>#}
+                                    <button class="remove" name="{{ note.note.note_id }}" type="button">remove</button>
+                                    {#                                    <button class="edit" type="button">edit</button>#}
                                 </div>
                             </div>
                         {% endfor %}
@@ -619,10 +619,9 @@
                     'note_id': note_id,
                 },
                 success: function (response) {
-                    if(response === 0){
+                    if (response === 0) {
                         alert('can not delete the note');
-                    }
-                    else{
+                    } else {
                         alert('successfully delete');
                     }
                 },
@@ -632,6 +631,31 @@
             });
         }
 
+
+        $('.remove').click(function () {
+            $(this).parent().parent().remove();
+            cancel_collect(this.name);
+        });
+
+        function cancel_collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelCollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel collect the note');
+                    } else {
+                        alert('successfully cancel');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
 
 
     </script>
