@@ -13,4 +13,5 @@ urlpatterns = [
     path('NoteDetail/', views.NoteDetail, name='NoteDetail'),
     path('profile/', views.profile, name='profile'),
     path('ModifyProfile/', views.ModifyProfile, name='ModifyProfile'),
+    path('ChangeAvatar/', views.ChangeAvatar, name='ChangeAvatar'),
 ]

@@ -38,8 +38,6 @@ def show_notes(request):
 
 
 def note_detail(request, note_id):
-    # 测试环境
-    request.session['uid'] = 1
     find_note = Note.objects.get(note_id=note_id)
     # 多个放回值时不能用get
     comments = Comment.objects.filter(note_id=note_id).all()
@@ -101,9 +99,7 @@ def upload_video(request):
         mp4.close()
         filename, text = VideoProcess(language, mode, filename, request.session.get('uid'))
         filename = os.path.join(Config.video_display_dir, filename)
-        dic = {}
-        dic['filename'] = filename
-        dic['text'] = text
+        dic = {'filename': filename, 'text': text}
         return render(request, 'codeEditor.html', dic)
 
     return render(request, 'upload.html')
@@ -156,7 +152,5 @@ def code_editor(request):
     text = video.text
     filename = video.name
     filename = os.path.join(Config.video_display_dir, filename)
-    dic = {}
-    dic['filename'] = filename
-    dic['text'] = text
+    dic = {'filename': filename, 'text': text}
     return render(request, 'codeEditor.html', dic)
