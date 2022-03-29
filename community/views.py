@@ -63,6 +63,7 @@ def RegisterCheck(request):
     new_user.save()
     return HttpResponse("1")
 
+
 # 获取python版本
 def get_version():
     v = sys.version_info
@@ -226,4 +227,18 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
 
 def allow_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def test(request):
+    return render(request, 'test.html')
+
+
+def DeleteNote(request):
+    note_id = request.POST.get('note_id')
+    note_delete = Note.objects.filter(note_id=note_id).first()
+    if note_delete is not None:
+        note_delete.delete()
+        return HttpResponse(1)
+    return HttpResponse(0)
+
 

@@ -13,5 +13,7 @@ urlpatterns = [
     path('NoteDetail/', views.NoteDetail, name='NoteDetail'),
     path('profile/', views.profile, name='profile'),
     path('ModifyProfile/', views.ModifyProfile, name='ModifyProfile'),
+    path('test/', views.test, name='test'),
     path('ChangeAvatar/', views.ChangeAvatar, name='ChangeAvatar'),
+    path('DeleteNote/', views.DeleteNote, name='DeleteNote'),
 ]

@@ -1,4 +1,6 @@
+from django.db.models import QuerySet
 from haystack import indexes
+from haystack.query import SearchQuerySet
 
 from .models import Note
 
@@ -15,4 +17,8 @@ class NoteIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         result_set = self.get_model().objects.all()
+        # for item in result_set:
+        #     print(item.create_time)
+        # result_set.order_by('create_time')
+        SearchQuerySet()
         return result_set

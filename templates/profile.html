@@ -415,10 +415,10 @@
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
                        aria-controls="pills-contact" aria-selected="false">My Code Notes</a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"#}
-{#                       aria-controls="pills-contact" aria-selected="false">Liked Notes</a>#}
-{#                </li>#}
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"#}
+                {#                       aria-controls="pills-contact" aria-selected="false">Liked Notes</a>#}
+                {#                </li>#}
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -443,13 +443,16 @@
                                             by {{ note.uid.username }}</a>
                                     </p>
                                     {% if note.content_html %}
-                                        {{ note.content_html | safe | truncatechars:200 }}
+                                        {{ note.content_html | striptags | truncatechars:200 }}
                                     {% else %}
                                         {{ note.content | truncatechars:150 }}
                                     {% endif %}
-                                    <a class="btn-link readmore">
+                                    <a class="btn-link readmore" href='{% url 'note:note_detail' note.note_id %}'>
                                         <i class="la la-arrow-right"></i>
                                     </a>
+                                    <br/>
+                                    <button class="delete" name="{{ note.note_id }}" type="button">delete</button>
+                                    <button class="edit" type="button">edit</button>
                                 </div>
                             </div>
                         {% endfor %}
@@ -616,6 +619,33 @@
                 }
             }
         );
+
+        $('.delete').click(function () {
+            {#$(this).parent().parent().parent().remove()#}
+            $(this).parent().parent().remove();
+            updateDatabase(this.name);
+        });
+
+        function updateDatabase(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/DeleteNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if(response === 0){
+                        alert('can not delete the note');
+                    }
+                    else{
+                        alert('successfully delete');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
 
     </script>
 
