@@ -163,11 +163,11 @@
                                     <div class="author-blog">
                                         <div class="author-profile-info">
                                             <div class="author-profile-pic">
-                                                <img src="/static/images/testimonials/pic1.jpg" alt=""> //用户头像
+                                                <img src="/static/avatar/{{ note.uid.avatar }}" alt="">
                                             </div>
                                             <div class="author-profile-content">
-                                                <p>Alice</p>
-                                                <p>123456@hotmail.com </p>
+                                                <p> {{ note.uid.username }} </p>
+                                                <p> {{ note.uid.email }} </p>
                                             </div>
                                         </div>
                                     </div>

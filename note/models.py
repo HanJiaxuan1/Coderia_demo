@@ -43,6 +43,21 @@ class User(models.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def is_collect(self, note):
+        if note.note_id is None:
+            return False
+        return UserCollectNote.objects.filter(user_id=self.uid, note_id=note.note_id).first() is not None
+
+    def collect(self, note):
+        if not self.is_collect(note):
+            user_note = UserCollectNote(user=self, note=note)
+            user_note.save()
+
+    def cancel_collect(self, note):
+        if self.is_collect(note):
+            user_note = UserCollectNote.objects.filter(user_id=self.uid, note_id=note.note_id).first()
+            user_note.delete()
     #
     # def like(self, note):
     #     if not self.is_liking(note):
@@ -191,3 +206,9 @@ class Reply(models.Model):
     def increase_views(self):
         self.views += 1
         self.save(update_fields=['views'])
+
+
+class UserCollectNote(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, verbose_name='note')

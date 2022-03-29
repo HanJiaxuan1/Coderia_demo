@@ -16,4 +16,6 @@ urlpatterns = [
     path('test/', views.test, name='test'),
     path('ChangeAvatar/', views.ChangeAvatar, name='ChangeAvatar'),
     path('DeleteNote/', views.DeleteNote, name='DeleteNote'),
+    path('CollectNote/', views.CollectNote, name='CollectNote'),
+    path('CancelCollectNote/', views.CancelCollectNote, name='CancelCollectNote'),
 ]
