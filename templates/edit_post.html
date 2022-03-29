@@ -1,0 +1,301 @@
+{% extends 'base_fix.html' %}
+
+{% block title %} Coderia - Edit Note {% endblock %}
+
+{% block style %}
+
+    <link rel="stylesheet" href="/static/node_modules/editor.md/css/editormd.css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/script/jquery-3.5.1.js"></script>
+
+    <script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/static/js/chosen.jquery.min.js"></script>
+
+    <!--begin code mirror -->
+    <!--下面两个是使用Code Mirror必须引入的-->
+    <link rel="stylesheet" href="/static/codemirror-5.31.0/lib/codemirror.css"/>
+    <script src="/static/codemirror-5.31.0/lib/codemirror.js"></script>
+    <!--Java代码高亮必须引入-->
+    <script src="/static/codemirror-5.31.0/clike.js"></script>
+    <!--groovy代码高亮-->
+    <script src="/static/codemirror-5.31.0/mode/groovy/groovy.js"></script>
+    <!--引入css文件，用以支持主题-->
+    <link rel="stylesheet" href="/static/codemirror-5.31.0/theme/dracula.css"/>
+
+    <!--支持代码折叠-->
+    <link rel="stylesheet" href="/static/codemirror-5.31.0/addon/fold/foldgutter.css"/>
+    <script src="/static/codemirror-5.31.0/addon/fold/foldcode.js"></script>
+    <script src="/static/codemirror-5.31.0/addon/fold/foldgutter.js"></script>
+    <script src="/static/codemirror-5.31.0/addon/fold/brace-fold.js"></script>
+    <script src="/static/codemirror-5.31.0/addon/fold/comment-fold.js"></script>
+    <!--括号匹配-->
+    <script src="/static/codemirror-5.31.0/addon/edit/matchbrackets.js"></script>
+    <!--end Code Mirror -->
+    <style>
+        .htmltextarea {
+            background-color: black;
+            color: white;
+            width: 100%;
+            height: 350px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 250px
+        }
+    </style>
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="page-content bg-white" style="width: 80%; margin-left: 10%">
+        {#标题#}
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="col-md-12">
+                <div class="col-md-8" align="center" style="float: left; margin-bottom: 20px">
+                    <label class="WriteIndex-titleInput Input-wrapper Input-wrapper&#45;&#45;multiline"
+                           for="note_title">
+                    <textarea id="note_title" name="note_title" rows="1" class="Input" maxlength="30"
+                              placeholder="Enter Title (Max: 30 letters)"
+                              style="-webkit-tap-highlight-color: rgba(26,26,26,0);
+                                -webkit-box-flex: 1;
+                                flex: 1 1;
+                                font-family: inherit;
+                                resize: none;
+                                color: #1a1a1a;
+                                overflow: hidden;
+                                min-height: 44px;
+                                display: block;
+                                width: 550px;
+                                border: 0;
+                                font-size: 32px;
+                                line-height: 1.4;
+                                font-weight: 600;
+                                outline: none;
+                                box-shadow: none;
+                                margin-top: 100px;
+                                background-color: gainsboro;
+                                padding: 5px;
+                                height: 50px;">{{ note.title }}</textarea>
+                    </label>
+                </div>
+                <div class="col-md-4" style="float: left; margin-bottom: 20px">
+                    <input type="submit" id="save_note" class="btn black radius-xl loadmore-btn dz-load-more"
+                           value="Save Change"
+                           style="height: 50px; margin-top:100px; margin-left: 20%; align-content: center;
+                        font-size: 20px; background-color: #a7d1f1">
+                </div>
+            </div>
+
+            {#markdown #}
+            <div id="test-editormd">
+                <label for="ts"></label>
+                <textarea class="form-control" id="ts" name="body">{{ note.content }}</textarea>
+            </div>
+            <div>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#Python"
+                           role="tab" aria-controls="pills-home" aria-selected="true"
+                           style="font-weight: bold; font-size: 1.5em">Python Compiler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#web" role="tab"
+                           aria-controls="pills-profile" aria-selected="false"
+                           style="font-weight: bold; font-size: 1.5em">HTML/CSS/JS Compiler</a>
+                    </li>
+                </ul>
+                <div id="pills-tabContent" class="tab-content">
+                    <div class="tab-pane fade active show" id="Python" role="tabpanel"
+                         aria-labelledby="pills-home-tab">
+                        <label for="code"></label><textarea class="form-control" id="code" name="code"></textarea>
+                        <label for="res"></label><textarea name="res" id="res"
+                                                           style="width: 100%; height: 250px"></textarea>
+                        <button id="test" class="btn black radius-xl loadmore-btn dz-load-more">Run Python Code</button>
+                    </div>
+                    <div class="tab-pane fade" id="web" role="tabpanel"
+                         aria-labelledby="pills-home-tab">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" id="pills-home-tab" data-toggle="pill"
+                                           href="#html"
+                                           role="tab" aria-controls="pills-home" aria-selected="true">HTML</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#css"
+                                           role="tab"
+                                           aria-controls="pills-profile" aria-selected="false">CSS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#js"
+                                           role="tab"
+                                           aria-controls="pills-contact" aria-selected="false">JS</a>
+                                    </li>
+                                </ul>
+                                <div id="pills-tabContent" class="tab-content">
+                                    <div class="tab-pane fade active show" id="html" role="tabpanel"
+                                         aria-labelledby="pills-home-tab">
+                                        <p>
+                                            <label for="htmlTextarea"></label><textarea class="htmltextarea"
+                                                                                        style="float:left"
+                                                                                        id="htmlTextarea"></textarea>
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="css" role="tabpanel"
+                                         aria-labelledby="pills-home-tab">
+                                        <p>
+                                            <label for="cssTextarea"></label><textarea class="htmltextarea"
+                                                                                       style="float:left"
+                                                                                       id="cssTextarea"></textarea>
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="js" role="tabpanel"
+                                         aria-labelledby="pills-home-tab">
+                                        <p>
+                                            <label for="jsTextarea"></label><textarea class="htmltextarea"
+                                                                                      style="float:left"
+                                                                                      id="jsTextarea"></textarea>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <iframe id="iFrame"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- begin Python code editor -->
+
+
+            <!-- end Python code editor-->
+
+            <!-- begin HTML/CSS/JS code editor -->
+
+            <!-- end HTML/CSS/JS code editor -->
+        </form>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/node_modules/editor.md/editormd.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            let editor = editormd("test-editormd", {
+                placeholder: 'This editor supports Markdown editing, write on the left, preview on the right',
+                width: '100%',
+                height: '500px',
+                syncScrolling: "single",
+                path: "/static/node_modules/editor.md/lib/",   //editor.md插件的lib目录地址
+                saveHTMLToTextarea: true,
+                emoji: true,
+                taskList: true,
+                theme: "dark",
+                toolbarIcons: function () {  //自定义工具栏
+                    return ["undo", "redo", "search", "|", "bold", "del", "italic", "quote",
+                        "uppercase", "lowercase", "|", "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                        "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image",
+                        "table", "code", "preformatted-text", "code-block", "datetime",
+                        "emoji", "pagebreak", "|", "clear", "watch", "preview"]
+                },
+            });
+        });
+    </script>
+
+    <script>
+
+        let version = "# version: Python3\n\n";
+        let codeAreaTip = "# please edit your code here:\n";
+        let codeStart = "# code start\n\n";
+        let codeEnd = "# code end\n\n";
+        let codeTip = "'''\nThis function is the entry of this program and\nit must be return your answer of current question.\n'''\n";
+        let code = "def solution():\n\tpass\n\nsolution()";
+        let initValue = version + codeAreaTip + codeStart + codeEnd + codeTip + code;
+
+        //根据DOM元素的id构造出一个编辑器
+        let editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            mode: "text/groovy",    //实现groovy代码高亮
+            mode: "text/x-java", //实现Java代码高亮
+            lineNumbers: true,	//显示行号
+            theme: "dracula",	//设置主题
+            lineWrapping: true,	//代码折叠
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
+            foldGutter: true, // 启用行槽中的代码折叠
+            autofocus: true, // 自动聚焦
+            matchBrackets: true,	//括号匹配
+            //readOnly: true,        //只读
+            styleActiveLine: true, // 显示选中行的样式
+//        theme: "leetcode", // 主题
+
+
+        });
+        editor.setSize('100%', '400px');     //设置代码框的长宽
+
+        // 设置初始文本，这个选项也可以在fromTextArea中配置
+        editor.setOption("value", initValue);
+        let test = document.getElementById("test");
+        test.onclick = function () {
+            let value = editor.getValue();
+            $.ajax({
+                url: '/CompileCode/',
+                type: 'post',
+                data: {
+                    'code': value,
+                },
+                success: function (returnData) {
+                    let x = $.parseJSON(returnData)
+                    let success = x['code']
+                    let result = x['output']
+                    $("#res").val(result)
+                },
+                error: function (res) {
+                    alert("fail to compile the code");
+                }
+            })
+        }
+
+    </script>
+
+    <script>
+        let save_note = document.getElementById("save_note");
+        let note_title = document.getElementById("note_title");
+        let note_content = document.getElementById("ts");
+        let note_html = document.getElementsByName('test-editormd-html-code');
+        save_note.onclick = function () {
+            $.ajax({
+                url: '/SaveNote/',
+                type: 'post',
+                data: {
+                    'note_id': {{ note.note_id }},
+                    'title': note_title.value,
+                    'content': note_content.value,
+                    'content_html': note_html[0].value
+                },
+                success: function (response) {
+                    switch (response) {
+                        case '0':
+                            alert('The title can not be none!');
+                            break;
+                        case '1':
+                            alert('The content can not be none!');
+                            break;
+                        case '2':
+                            window.location.replace("{% url 'note:note_detail' note.note_id %}");
+                            break;
+                    }
+                },
+                error: function () {
+                    alert("fail to post the note");
+                }
+            })
+        }
+    </script>
+    <script src="/static/js/html.js"></script>
+
+{% endblock %}

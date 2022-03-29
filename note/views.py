@@ -36,7 +36,7 @@ def show_notes(request):
     if 'uid' in request.session.keys():
         user = User.objects.get(uid=request.session.get('uid'))
         note_list_set = Note.objects.all()
-        note_list = [{'note': note, 'state': user.is_collect(note)}
+        note_list = [{'note': note, 'collect_state': user.is_collect(note), 'like_state': user.is_liking(note)}
                      for note in note_list_set]
         return render(request, 'note_blog.html', {'note_list': note_list, 'user': user})
     else:
@@ -45,10 +45,21 @@ def show_notes(request):
 
 
 def note_detail(request, note_id):
-    find_note = Note.objects.get(note_id=note_id)
-    # 多个放回值时不能用get
-    comments = Comment.objects.filter(note_id=note_id).all()
-    return render(request, 'note_detail.html', {'note': find_note, 'comment_list': comments})
+    note = Note.objects.get(note_id=note_id)
+    if 'uid' in request.session.keys():
+        user = User.objects.get(uid=request.session['uid'])
+        is_liking = user.is_liking(note)
+        is_collecting = user.is_collect(note)
+        liking_num = UserLikeNote.objects.filter(user_id=user.uid, note_id=note_id).count()
+        collecting_num = UserCollectNote.objects.filter(user_id=user.uid, note_id=note_id).count()
+
+        # 多个放回值时不能用get
+        comments = Comment.objects.filter(note_id=note_id).all()
+        return render(request, 'note_detail.html', {'note': note, 'comment_list': comments,
+                                                    'is_liking': is_liking, 'is_collecting': is_collecting,
+                                                    'liking_num': liking_num, 'collecting_num': collecting_num})
+    else:
+        return redirect(reverse('login'))
 
 
 def save_comment(request):
@@ -161,3 +172,14 @@ def code_editor(request):
     filename = os.path.join(Config.video_display_dir, filename)
     dic = {'filename': filename, 'text': text}
     return render(request, 'codeEditor.html', dic)
+
+
+def edit_note(request, note_id):
+    if 'uid' not in request.session.keys():
+        return redirect(reverse('login'))
+    user = User.objects.get(uid=request.session['uid'])
+    note = Note.objects.filter(note_id=note_id).first()
+    if user.uid == note.uid.uid:
+        return render(request, 'edit_post.html', {'note': note})
+    else:
+        return redirect(reverse('index'))

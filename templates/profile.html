@@ -400,7 +400,7 @@
                                     </a>
                                     <br/>
                                     <button class="delete" name="{{ note.note_id }}" type="button">delete</button>
-                                    <button class="edit" type="button">edit</button>
+                                    <button class="edit" type="button"><a href="{% url 'note:edit_note' note.note_id %}">edit</a></button>
                                 </div>
                             </div>
                         {% endfor %}
