@@ -50,8 +50,8 @@ def note_detail(request, note_id):
         user = User.objects.get(uid=request.session['uid'])
         is_liking = user.is_liking(note)
         is_collecting = user.is_collect(note)
-        liking_num = UserLikeNote.objects.filter(user_id=user.uid, note_id=note_id).count()
-        collecting_num = UserCollectNote.objects.filter(user_id=user.uid, note_id=note_id).count()
+        liking_num = UserLikeNote.objects.filter(note_id=note_id).count()
+        collecting_num = UserCollectNote.objects.filter(note_id=note_id).count()
 
         # 多个放回值时不能用get
         comments = Comment.objects.filter(note_id=note_id).all()
