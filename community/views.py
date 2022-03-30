@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from django.utils import timezone
 
 from django.core.files.uploadedfile import UploadedFile
 from django.shortcuts import render, redirect
@@ -289,4 +290,26 @@ def LikeNote(request):
         user.like(note_like)
         return HttpResponse(1)
     return HttpResponse(0)
+
+
+def SaveNote(request):
+    if request.method == 'POST':
+        note_id = request.POST.get('note_id')
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        content_html = request.POST.get('content_html')
+        category = Category.objects.get(name='python')
+        if title is None or title == '':
+            return HttpResponse("0")
+        if content is None or content == '':
+            return HttpResponse("1")
+        note = Note.objects.get(note_id=note_id)
+
+        note.title = title
+        note.content = content
+        note.content_html = content_html
+        note.save()
+        return HttpResponse("2")
+    return HttpResponse("0")
+
 

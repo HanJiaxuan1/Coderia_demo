@@ -20,5 +20,5 @@ class NoteIndex(indexes.SearchIndex, indexes.Indexable):
         # for item in result_set:
         #     print(item.create_time)
         # result_set.order_by('create_time')
-        SearchQuerySet()
+        print(result_set)
         return result_set

@@ -13,6 +13,7 @@ urlpatterns = [
     path('get_reply/', views.get_reply, name='get_reply'),
     path('upload_video/', views.upload_video, name='upload_video'),
     path('code_editor/', views.code_editor, name='code_editor'),
+    path('edit_note/<note_id>/', views.edit_note, name='edit_note'),
 ]
 
 # urlpatterns += static(settings)
