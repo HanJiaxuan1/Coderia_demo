@@ -53,14 +53,15 @@
                                                     {% endif %}
                                                     <span>  {{ liking_num }} Likes</span>
                                                 </li>
-                                                <li class="collect" name="{{ note.note_id }}" state="{{ is_collecting }}"
+                                                <li class="collect" name="{{ note.note_id }}"
+                                                    state="{{ is_collecting }}"
                                                     style="color: #0b0b0b">
                                                     {% if is_collecting %}
                                                         <i class="fa fa-star" style="font-size: 20px"></i>
                                                     {% else %}
                                                         <i class="fa fa-star-o" style="font-size: 20px"></i>
                                                     {% endif %}
-                                                    <span>  {{ collecting_num }} Collect</span>
+                                                    <span>  {{ collecting_num }} Collects</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -325,6 +326,9 @@
             object.innerHTML = str
         }
 
+        let liking_num = parseInt({{ liking_num }});
+        let collecting_num = parseInt({{ collecting_num }});
+
         $('.like').click(function () {
             let element = document.getElementsByClassName("like")[0]
             let note_id = element.getAttribute("name");
@@ -332,14 +336,14 @@
 
             if (state === "True") {
                 element.children[0].setAttribute("class", "fa fa-thumbs-o-up");
-                let collecting_num = parseInt({{ collecting_num }}) - 1
-                element.children[1].innerHTML =  collecting_num + " LIKES"
-                element.setAttribute("state", "False")
+                liking_num = liking_num - 1;
+                element.children[1].innerHTML = liking_num + " LIKES";
+                element.setAttribute("state", "False");
                 cancel_like(note_id);
             } else {
                 element.children[0].setAttribute("class", "fa fa-thumbs-up");
-                let collecting_num = parseInt({{ collecting_num }}) + 1
-                element.children[1].innerHTML =  collecting_num + " LIKES"
+                liking_num = liking_num + 1;
+                element.children[1].innerHTML = liking_num + " LIKES"
                 element.setAttribute("state", "True")
                 like(note_id);
             }
@@ -393,10 +397,14 @@
 
             if (state === "True") {
                 element.children[0].setAttribute("class", "fa fa-star-o");
+                collecting_num = collecting_num - 1;
+                element.children[1].innerHTML = collecting_num + " COLLECTS";
                 element.setAttribute("state", "False")
                 cancel_collect(note_id);
             } else {
                 element.children[0].setAttribute("class", "fa fa-star");
+                collecting_num = collecting_num + 1;
+                element.children[1].innerHTML = collecting_num + " COLLECTS";
                 element.setAttribute("state", "True")
                 collect(note_id);
             }

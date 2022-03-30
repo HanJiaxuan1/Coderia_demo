@@ -87,22 +87,27 @@
                                                 <br/>
                                                 {% if user is not None %}
 
-                                                    <button class="collect" name="{{ note.note.note_id }}"
-                                                            type="button">
+                                                    <i class="collect" name="{{ note.note.note_id }}">
                                                         {% if note.collect_state %}
-                                                            cancel collect
+                                                            <i class="fa fa-star" style="font-size: 20px"></i>
+                                                            <span>cancel collect</span>
                                                         {% else %}
-                                                            collect it
+                                                            <i class="fa fa-star-o" style="font-size: 20px"></i>
+                                                            <span>collect</span>
                                                         {% endif %}
-                                                    </button>
 
-                                                    <button class="like" name="{{ note.note.note_id }}" type="button">
+                                                    </i>
+
+                                                    <i class="like" name="{{ note.note.note_id }}">
                                                         {% if note.like_state %}
-                                                            cancel like
+                                                            <i class="fa fa-thumbs-up" style="font-size: 20px"></i>
+                                                            <span>cancel like</span>
                                                         {% else %}
-                                                            like
+                                                            <i class="fa fa-thumbs-o-up" style="font-size: 20px"></i>
+                                                            <span>like</span>
                                                         {% endif %}
-                                                    </button>
+
+                                                    </i>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -179,13 +184,15 @@
 {% block script %}
     <script>
         $('.collect').click(function () {
-            let note_id = this.name;
-            let state = this.innerHTML;
+            let note_id = this.getAttribute('name');
+            let state = this.children[1].innerHTML;
             if (state === "cancel collect") {
-                this.innerHTML = "collect it";
+                this.children[0].setAttribute("class", "fa fa-star-o");
+                this.children[1].innerHTML = "collect";
                 cancel_collect(note_id);
             } else {
-                this.innerHTML = "cancel collect";
+                this.children[0].setAttribute("class", "fa fa-star");
+                this.children[1].innerHTML = "cancel collect";
                 collect(note_id);
             }
 
@@ -232,13 +239,15 @@
         }
 
         $('.like').click(function () {
-            let note_id = this.name;
-            let state = this.innerHTML;
+            let note_id = this.getAttribute('name');
+            let state = this.children[1].innerHTML;
             if (state === "cancel like") {
-                this.innerHTML = "like";
+                this.children[0].setAttribute("class", "fa fa-thumbs-o-up");
+                this.children[1].innerHTML = "like";
                 cancel_like(note_id);
             } else {
-                this.innerHTML = "cancel like";
+                this.children[0].setAttribute("class", "fa fa-thumbs-up");
+                this.children[1].innerHTML = "cancel like";
                 like(note_id);
             }
 

@@ -1,6 +1,6 @@
 {% extends 'base_fix.html' %}
 
-{% block title %} Coderia - Post {% endblock %}
+{% block title %} Coderia - Edit Note {% endblock %}
 
 {% block style %}
 
@@ -79,7 +79,7 @@
                                 margin-top: 100px;
                                 background-color: gainsboro;
                                 padding: 5px;
-                                height: 50px;"></textarea>
+                                height: 50px;">{{ note.title }}</textarea>
                     </label>
                 </div>
                 <div class="col-md-4" style="float: left; margin-bottom: 20px">
@@ -92,7 +92,8 @@
 
             {#markdown #}
             <div id="test-editormd">
-                <label for="ts"></label><textarea class="form-control" id="ts" name="body"></textarea>
+                <label for="ts"></label>
+                <textarea class="form-control" id="ts" name="body">{{ note.content }}</textarea>
             </div>
             <div>
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -268,9 +269,10 @@
         let note_html = document.getElementsByName('test-editormd-html-code');
         save_note.onclick = function () {
             $.ajax({
-                url: '/PostNote/',
+                url: '/SaveNote/',
                 type: 'post',
                 data: {
+                    'note_id': {{ note.note_id }},
                     'title': note_title.value,
                     'content': note_content.value,
                     'content_html': note_html[0].value
@@ -284,7 +286,7 @@
                             alert('The content can not be none!');
                             break;
                         case '2':
-                            window.location.replace("{% url 'index' %}");
+                            window.location.replace("{% url 'note:note_detail' note.note_id %}");
                             break;
                     }
                 },

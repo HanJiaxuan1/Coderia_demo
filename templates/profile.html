@@ -399,8 +399,16 @@
                                         <i class="la la-arrow-right"></i>
                                     </a>
                                     <br/>
-                                    <button class="delete" name="{{ note.note_id }}" type="button">delete</button>
-                                    <button class="edit" type="button">edit</button>
+                                <ul>
+                                    <li class="delete" id="{{ note.note_id }}" type="button" style="display: inline; margin-left: -5%">
+                                        <i class="fa fa-trash" style="font-size: 30px"></i>
+                                    </li>
+                                    <li class="edit" type="button" style="display: inline; margin-left: 5%">
+                                        <a href="{% url 'note:edit_note' note.note_id %}">
+                                        <i class="fa fa-pencil-square" style="font-size: 29px;color: rgba(23,23,23,0.85)"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                                 </div>
                             </div>
                         {% endfor %}
@@ -490,8 +498,8 @@
                                         <i class="la la-arrow-right"></i>
                                     </a>
                                     <br/>
-{#                                    <button class="remove" name="{{ note.note.note_id }}" type="button">remove</button>#}
-{#                                    <button class="edit" type="button">edit</button>#}
+                                    <button class="remove" name="{{ note.note.note_id }}" type="button">remove</button>
+                                    {#                                    <button class="edit" type="button">edit</button>#}
                                 </div>
                             </div>
                         {% endfor %}
@@ -606,9 +614,8 @@
         );
 
         $('.delete').click(function () {
-            {#$(this).parent().parent().parent().remove()#}
-            $(this).parent().parent().remove();
-            updateDatabase(this.name);
+            $(this).parent().parent().parent().remove();
+            updateDatabase(this.id);
         });
 
         function updateDatabase(note_id) {
@@ -619,10 +626,9 @@
                     'note_id': note_id,
                 },
                 success: function (response) {
-                    if(response === 0){
+                    if (response === 0) {
                         alert('can not delete the note');
-                    }
-                    else{
+                    } else {
                         alert('successfully delete');
                     }
                 },
@@ -632,6 +638,31 @@
             });
         }
 
+
+        $('.remove').click(function () {
+            $(this).parent().parent().remove();
+            cancel_collect(this.name);
+        });
+
+        function cancel_collect(note_id) {
+            $.ajax({
+                type: 'post',
+                url: '/CancelCollectNote/',
+                data: {
+                    'note_id': note_id,
+                },
+                success: function (response) {
+                    if (response === 0) {
+                        alert('fail to cancel collect the note');
+                    } else {
+                        alert('successfully cancel');
+                    }
+                },
+                error: function () {
+                    alert('connection error');
+                }
+            });
+        }
 
 
     </script>
