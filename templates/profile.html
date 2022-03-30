@@ -399,8 +399,16 @@
                                         <i class="la la-arrow-right"></i>
                                     </a>
                                     <br/>
-                                    <button class="delete" name="{{ note.note_id }}" type="button">delete</button>
-                                    <button class="edit" type="button"><a href="{% url 'note:edit_note' note.note_id %}">edit</a></button>
+                                <ul >
+                                    <li class="delete" name="{{ note.note_id }}" type="button">
+                                        <i class="fa fa-trash " style="font-size: 30px"></i>
+                                    </li>
+                                    <li class="edit" type="button">
+                                        <a href="{% url 'note:edit_note' note.note_id %}">
+                                        <i class="fa fa-pencil-square-o " style="font-size: 30px;color: rgba(23,23,23,0.85)"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                                 </div>
                             </div>
                         {% endfor %}
